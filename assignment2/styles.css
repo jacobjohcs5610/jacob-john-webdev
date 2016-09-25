@@ -1,0 +1,38 @@
+
+form {
+	margin-bottom: 1rem;
+}
+
+.headfoot {
+	position: relative;
+    color: #ffffff;
+}
+
+.floatright{
+
+    float: right;
+}
+
+.table > tbody > tr:first-child > td{
+    border: none;
+}
+
+.color-primary {
+    color: #428bca;
+}
+
+a:hover{
+    text-decoration: none;
+}
+/*
+input {
+	margin-bottom: 15px;
+}
+
+button {
+	margin-bottom: 15px;
+}
+*/
+
+
+
