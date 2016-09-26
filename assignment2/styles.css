@@ -13,8 +13,9 @@ form {
     float: right;
 }
 
-.table > tbody > tr:first-child > td{
-    border: none;
+
+table td{
+    border-top: none !important;
 }
 
 .color-primary {
