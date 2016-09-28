@@ -4,15 +4,17 @@ form {
 }
 
 .headfoot {
-	position: relative;
+    position: relative;
     color: #ffffff;
 }
 
 .floatright{
-
     float: right;
 }
 
+.floatleft{
+    float: left;
+}
 
 table td{
     border-top: none !important;
@@ -58,7 +60,21 @@ video{
 
 #navcol1, #navcol2 {
     margin-right: 60px;
+    color: #ffffff;
+    margin-bottom: auto;
+    margin-top: auto;
+    padding: 0%;
 }
+
+
+.navbar-header{
+    width: 100%;
+}
+
+.headinline{
+    display: inline;
+}
+
 
 
 
