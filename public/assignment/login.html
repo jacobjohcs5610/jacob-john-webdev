@@ -1,24 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
-</head>
-<body>
+<html>
+  <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="styles.css" type="text/css" rel="stylesheet"/>
+
+    <title>Login</title>
+  </head>
+  <body>
+    
     <div class="container">
-        <h1>Login</h1>
-        <input type="text"
-               class="form-control"
-               placeholder="username"/>
-        <input type="password"
-               class="form-control"
-               placeholder="password"/>
-        <a class="btn btn-primary btn-block"
-           href="profile.html">Login</a>
-        <a class="btn btn-success btn-block"
-           href="register.html">Register</a>
+      
+      <h1>Login</h1>
+      
+ 
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <form>
+            <input type="text" class="form-control" placeholder="username">
+          </form>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <form>
+            <input type="password" class="form-control" placeholder="password">
+          </form>
+
+        </div>
+      </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+          
+          <form action="profile.html">
+            <a href="profile.html"><button type="submit" class="btn btn-primary form-control">Login</button></a>
+          </form>
+
+        </div>
     </div>
-</body>
+
+    <div class="row">
+        <div class="col-xs-12">
+          
+          <form action="register.html">
+            <a href="register.html"><button type="submit" class="btn btn-success form-control">Register</button></a>
+          </form>
+
+        </div>
+    </div>
+
+
+
+
+
+
+    </div>
+    
+  </body>
 </html>
