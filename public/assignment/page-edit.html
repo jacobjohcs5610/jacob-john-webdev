@@ -13,54 +13,91 @@
         <div class="navbar-header">
 
 
-            <a href="page-list.html"><scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan></a>
+            <div class="col-sm-1 ">
 
-            <b class="navbar-brand">Edit Page</b>
+                <a href="page-list.html" class="floatleft"><scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan></a>
+            </div>
+
+            <div class="col-sm-1 hidden-xs"  >
+                <b class="  navbar-brand"  >Pages</b>
+            </div>
+
+            <div class="col-sm-1 hidden-xs" >
+                <a href="page-new.html" class=" navbar-brand"  ><scan class="glyphicon glyphicon-plus navbar-brand" >
+
+                </scan></a>
+            </div>
 
 
+            <div class="col-sm-9">
+                <b class="navbar-brand">Edit Page</b>
 
-            <a href="page-list.html"> <scan class="glyphicon glyphicon-ok navbar-brand floatright"></scan></a>
+
+                <a href="page-list.html"><scan class="glyphicon glyphicon-ok floatright navbar-brand"></scan></a>
+            </div>
         </div>
 
 
     </div>
 </nav>
 
-<div class="container">
+<div class="container-fluid">
 
-    <form action="page-list.html">
-    <div class="row">
-        <div class="col-xs-12">
+    <div class="col-sm-3 sidebar">
 
-
-                <label for="username">Name</label>
-                <input id="username" type="text" class="form-control" placeholder="Page Name">
+        <table class="table color-primary">
 
 
-        </div>
+
+            <tr>
+                <td><a href="widget-list.html">Test Page</a></td>
+                <td><a href="page-edit.html"><scan class="glyphicon glyphicon-cog floatright"></scan></a></td>
+
+            </tr>
+
+
+
+        </table>
+
+
     </div>
 
-    <div class="row">
-        <div class="col-xs-12">
+    <div class="col-sm-9 col-sm-offset-3 main">
+
+        <form action="page-list.html">
+            <div class="row">
+                <div class="col-sm-9">
 
 
-                <label for="email">Title</label>
-                <input id="email" type="text" class="form-control" placeholder="Page Title">
+                    <label for="username">Name</label>
+                    <input id="username" type="text" class="form-control" placeholder="Page Name">
 
 
-        </div>
-    </div>
+                </div>
+            </div>
 
-    <div class="row">
-        <div class="col-xs-12">
-
-
-                <a href="page-list.html"><button class="btn btn-danger form-control">Delete</button></a>
+            <div class="row">
+                <div class="col-sm-9">
 
 
-        </div>
-    </div>
-    </form>
+                    <label for="email">Title</label>
+                    <input id="email" type="text" class="form-control" placeholder="Page Title">
+
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-9">
+
+
+                    <a href="page-list.html"><button class="btn btn-danger form-control">Delete</button></a>
+
+
+                </div>
+            </div>
+        </form>
+     </div>
 
 
 

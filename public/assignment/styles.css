@@ -58,13 +58,21 @@ video{
     }
 }
 
+.colorwhite{
+    color:#ffffff;
+}
+
+
 #navcol1, #navcol2 {
     margin-right: 60px;
-    color: #ffffff;
-    margin-bottom: auto;
-    margin-top: auto;
-    padding: 0%;
+     margin-top: auto;
+     margin-bottom: auto;
+     padding: 0%;
+
 }
+
+
+
 
 
 .navbar-header{
