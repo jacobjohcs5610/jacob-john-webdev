@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="styles.css" type="text/css" rel="stylesheet"/>
 
-    <title>Edit Website</title>
-</head>
-<body>
 
 <nav class="navbar navbar-default navbar-fixed-top headfoot" >
     <div class="container-fluid bg-primary">
         <div class="navbar-header navbar-brand">
 
 
-            <a href="website-list.html" class="headfoot floatleft"><scan class="glyphicon glyphicon-chevron-left headfoot"></scan></a>
+            <a href="#/user/:uid/website" class="headfoot floatleft"><scan class="glyphicon glyphicon-chevron-left headfoot"></scan></a>
 
 
 
@@ -21,7 +13,7 @@
 
 
 
-            <a href="website-new.html" class="navbar-collapse collapse navbar-brand" id="navcol2"  ><scan class="glyphicon glyphicon-plus colorwhite" >
+            <a href="#/user/:uid/website/new" class="navbar-collapse collapse navbar-brand" id="navcol2"  ><scan class="glyphicon glyphicon-plus colorwhite" >
 
             </scan></a>
 
@@ -32,7 +24,7 @@
 
 
 
-            <a href="website-list.html"><scan class="glyphicon glyphicon-ok headfoot floatright"></scan></a>
+            <a href="#/user/:uid/website"><scan class="glyphicon glyphicon-ok headfoot floatright"></scan></a>
 
 
             </div>
@@ -51,8 +43,8 @@
 
 
                 <tr>
-                    <td><a href="page-list.html">Test Website</a></td>
-                    <td><a href="website-edit.html"><scan class="glyphicon glyphicon-cog"></scan></a></td>
+                    <td><a href="#/user/:uid/website/:wid/page">Test Website</a></td>
+                    <td><a href="#/user/:uid/website/:wid"><scan class="glyphicon glyphicon-cog"></scan></a></td>
 
                 </tr>
 
@@ -71,7 +63,7 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-            <form action="website-list.html">
+            <form action="#/user/:uid/website">
             <div class="row">
                 <label for="username">Website Name</label>
                 <input id="username" type="text" class="form-control" placeholder="Name">
@@ -83,7 +75,7 @@
             </div>
 
             <div class="row">
-                <a href="website-list.html"><button type="submit" class="btn btn-danger form-control">Delete</button></a>
+                <a href="#/user/:uid/website"><button type="submit" class="btn btn-danger form-control">Delete</button></a>
             </div>
             </form>
 
@@ -103,7 +95,7 @@
         <div class="navbar-header navbar-brand">
 
 
-                <a href="profile.html"><scan class="glyphicon glyphicon-user headfoot floatright"></scan></a>
+                <a href="#/user/:uid"><scan class="glyphicon glyphicon-user headfoot floatright"></scan></a>
 
 
         </div>
@@ -111,6 +103,5 @@
 </nav>
 
 
-</body>
-</html>
+
 

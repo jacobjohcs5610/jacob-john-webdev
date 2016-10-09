@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="styles.css" type="text/css" rel="stylesheet"/>
 
-    <title>New Page</title>
-</head>
-<body>
 
 <nav class="navbar navbar-default navbar-fixed-top headfoot " >
     <div class="container-fluid row">
@@ -15,7 +7,7 @@
 
             <div class="col-sm-1 ">
 
-                <a href="page-list.html" class="floatleft"><scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan></a>
+                <a href="#/user/:uid/website/:wid/page" class="floatleft"><scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan></a>
             </div>
 
             <div class="col-sm-1 hidden-xs ">
@@ -23,7 +15,7 @@
             </div>
 
             <div class="col-sm-1 hidden-xs">
-                <a href="page-new.html"   ><scan class="glyphicon glyphicon-plus navbar-brand" >
+                <a href="#/user/:uid/website/:wid/page/new"   ><scan class="glyphicon glyphicon-plus navbar-brand" >
 
                 </scan></a>
             </div>
@@ -33,7 +25,7 @@
                 <b class="navbar-brand">New Page</b>
 
 
-                <a href="page-list.html"><scan class="glyphicon glyphicon-ok floatright navbar-brand"></scan></a>
+                <a href="#/user/:uid/website/:wid/page"><scan class="glyphicon glyphicon-ok floatright navbar-brand"></scan></a>
             </div>
 
         </div>
@@ -53,8 +45,8 @@
 
 
                 <tr>
-                    <td><a href="widget-list.html">Test Page</a></td>
-                    <td><a href="page-edit.html"><scan class="glyphicon glyphicon-cog floatright"></scan></a></td>
+                    <td><a href="#/user/:uid/website/:wid/page/:pid/widget">Test Page</a></td>
+                    <td><a href="#/user/:uid/website/:wid/page/:pid"><scan class="glyphicon glyphicon-cog floatright"></scan></a></td>
 
                 </tr>
 
@@ -109,12 +101,10 @@
         <div class="navbar-header navbar-brand">
 
 
-            <a href="profile.html"><scan class="glyphicon glyphicon-user color-primary floatright"></scan></a>
+            <a href="#/user/:uid"><scan class="glyphicon glyphicon-user color-primary floatright"></scan></a>
 
 
         </div>
     </div>
 </nav>
 
-</body>
-</html>
