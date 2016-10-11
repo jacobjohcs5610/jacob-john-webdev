@@ -65,7 +65,7 @@
 
 
                     <label for="username">Name</label>
-                    <input id="username" type="text" class="form-control" placeholder="Page Name">
+                    <input id="username" ng-model="model.page.username" type="text" class="form-control" placeholder="Page Name">
 
 
                 </div>
@@ -76,7 +76,7 @@
 
 
                     <label for="email">Title</label>
-                    <input id="email" type="text" class="form-control" placeholder="Page Title">
+                    <input id="email" ng-model="model.page.title" type="text" class="form-control" placeholder="Page Title">
 
 
                 </div>
@@ -86,7 +86,7 @@
                 <div class="col-sm-9">
 
 
-                    <a href="#/user/:uid/website/:wid/page"><button class="btn btn-danger form-control">Delete</button></a>
+                    <a href="#/user/:uid/website/:wid/page"><button  class="btn btn-danger form-control">Delete</button></a>
 
 
                 </div>
