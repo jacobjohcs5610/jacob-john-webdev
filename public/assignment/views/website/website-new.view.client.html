@@ -6,7 +6,7 @@
         <div class="navbar-header navbar-brand">
 
 
-            <a href="#/user/:uid/website" class="headfoot floatleft"><scan class="glyphicon glyphicon-chevron-left headfoot"></scan></a>
+            <a href="#/user/{{model.userId}}/website" class="headfoot floatleft"><scan class="glyphicon glyphicon-chevron-left headfoot"></scan></a>
 
 
 
@@ -15,7 +15,7 @@
 
 
 
-            <a href="#/user/:uid/website/new" class="navbar-collapse collapse navbar-brand" id="navcol2"  ><scan class="glyphicon glyphicon-plus colorwhite" ></scan></a>
+            <a href="#/user/{{model.userId}}/website/new" class="navbar-collapse collapse navbar-brand" id="navcol2"  ><scan class="glyphicon glyphicon-plus colorwhite" ></scan></a>
 
 
 
@@ -25,7 +25,7 @@
 
 
 
-            <a href="#/user/:uid/website"><scan class="glyphicon glyphicon-ok headfoot floatright"></scan></a>
+            <a href="#/user/{{model.userId}}/website" ng-click="model.addWebsite(model.website)"><scan class="glyphicon glyphicon-ok headfoot floatright"></scan></a>
 
 
         </div>
@@ -39,19 +39,15 @@
 
         <div class="col-sm-3 col-md-2 sidebar">
 
-            <table class="table color-primary">
+            <div ng-repeat="eachwebsite in model.websites">
+                <table class="table color-primary">
+                    <tr>
+                        <td><a href="#/user/{{model.userId}}/website/{{eachwebsite._id}}/page">{{eachwebsite.name}}</a></td>
+                        <td><a href="#/user/{{model.userId}}/website/{{eachwebsite._id}}"  class="floatright"><scan class="glyphicon glyphicon-cog"></scan></td></a>
 
-
-
-                <tr>
-                    <td><a href="#/user/:uid/website/:wid/page">Test Website</a></td>
-                    <td><a href="#/user/:uid/website/:wid"><scan class="glyphicon glyphicon-cog"></scan></a></td>
-
-                </tr>
-
-
-
-            </table>
+                    </tr>
+                </table>
+            </div>
 
 
         </div>
@@ -91,7 +87,7 @@
         <div class="navbar-header navbar-brand ">
 
 
-                <a href="#/user/:uid"><scan class="glyphicon glyphicon-user headfoot floatright"></scan></a>
+                <a href="#/user/{{model.userId}}"><scan class="glyphicon glyphicon-user headfoot floatright"></scan></a>
 
 
         </div>

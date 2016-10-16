@@ -5,7 +5,7 @@
         <div class="navbar-header navbar-brand">
 
 
-            <a href="#/user/:uid"><scan class="glyphicon glyphicon-chevron-left headfoot"></scan></a>
+            <a  href="#/user/{{model.userId}}"><scan class="glyphicon glyphicon-chevron-left headfoot"></scan></a>
 
             <b class="headfoot">Websites</b>
 
@@ -13,7 +13,7 @@
 
 
 
-            <a href="#/user/:uid/website/new"><scan class="glyphicon glyphicon-plus headfoot floatright"></scan></a>
+            <a href="#/user/{{model.userId}}/website/new" ><scan class="glyphicon glyphicon-plus headfoot floatright"></scan></a>
         </div>
 
     </div>
@@ -25,22 +25,16 @@
     <div class="row">
         <div class="col-xs-12">
 
-            <table class="table color-primary">
 
-
-
-                    <tr>
-                        <td><a href="#/user/:uid/website/:wid/page">Test Website</a></td>
-                        <td><a href="#/user/:uid/website/:wid"><scan class="glyphicon glyphicon-cog"></scan></td></a>
-
-                    </tr>
-
-
-
-            </table>
 
             <div ng-repeat="website in model.websites">
-                {{website.name}}
+                <table class="table color-primary">
+                    <tr>
+                        <td><a href="#/user/{{model.userId}}/website/{{website._id}}/page">{{website.name}}</a></td>
+                        <td><a href="#/user/{{model.userId}}/website/{{website._id}}"  class="floatright"><scan class="glyphicon glyphicon-cog"></scan></td></a>
+
+                    </tr>
+                </table>
             </div>
 
         </div>
@@ -69,7 +63,7 @@
         <div class="navbar-header navbar-brand floatright">
 
 
-                <a href="#/user/:uid"><scan class="glyphicon glyphicon-user headfoot floatright"></scan></a>
+                <a href="#/user/{{model.userId}}"><scan class="glyphicon glyphicon-user headfoot floatright"></scan></a>
 
 
         </div>

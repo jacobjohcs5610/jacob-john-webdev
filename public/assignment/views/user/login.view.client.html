@@ -9,7 +9,7 @@
         <div class="col-xs-12">
           
 
-            <input type="text" ng-model="model.user.username" class="form-control" placeholder="username">
+            <input id="user" type="text" ng-model="model.user.username" class="form-control" placeholder="username">
 
 
         </div>
@@ -29,7 +29,7 @@
         <div class="col-xs-12">
           
 
-            <a ng-click="model.login(user)"><button type="submit" class="btn btn-primary form-control">Login</button></a>
+            <a ng-click="model.login(model.user)"><button type="submit" class="btn btn-primary form-control">Login</button></a>
 
 
         </div>

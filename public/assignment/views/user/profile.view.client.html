@@ -11,7 +11,7 @@
 
 
 
-            <a href="#/user/:uid"><scan class="glyphicon glyphicon-ok headfoot floatright"></scan></a>
+            <a href="#/user/{{model.userId}}" ng-click="model.updateProfile(model.user)"><scan class="glyphicon glyphicon-ok headfoot floatright"></scan></a>
 
         </div>
 
@@ -19,9 +19,9 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container" >
 
-    <form action="#/user/:uid/website">
+
         <div class="row">
             <div class="col-xs-12">
 
@@ -48,7 +48,7 @@
 
 
                 <label for="firstname">First Name</label>
-                <input id="firstname" ng-model="model.user.firstname" type="text" class="form-control" placeholder="First Name">
+                <input id="firstname" ng-model="model.user.firstName" type="text" class="form-control" placeholder="First Name">
 
 
             </div>
@@ -59,7 +59,7 @@
 
 
                 <label for="lastname">Last Name</label>
-                <input id="lastname" ng-model="model.user.lastname" type="text" class="form-control" placeholder="Last Name">
+                <input id="lastname" ng-model="model.user.lastName" type="text" class="form-control" placeholder="Last Name">
 
 
             </div>
@@ -68,13 +68,13 @@
         <div class="row">
             <div class="col-xs-12">
 
-                <button class="btn btn-primary btn-block form-control" type="submit">Websites</button>
+                <a href="#/user/{{model.userId}}/website"><button class="btn btn-primary btn-block form-control" >Websites</button></a>
 
 
 
             </div>
         </div>
-    </form>
+
 
         <div class="row">
             <div class="col-xs-12">
