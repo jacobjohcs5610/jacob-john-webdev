@@ -7,7 +7,7 @@
 
             <div class="col-sm-1 ">
 
-                <a href="#/user/:uid/website/:wid/page" class="floatleft"><scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan></a>
+                <a href="#/user/{{model.userId}}/website/{{model.webId}}/page" class="floatleft"><scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan></a>
             </div>
 
             <div class="col-sm-1 hidden-xs">
@@ -15,7 +15,7 @@
             </div>
 
             <div class="col-sm-1 hidden-xs">
-                <a href="#/user/:uid/website/:wid/page/new"  ><scan class="glyphicon glyphicon-plus navbar-brand" >
+                <a href="#/user/{{model.userId}}/website/{{model.webId}}/page/new"  ><scan class="glyphicon glyphicon-plus navbar-brand" >
 
                 </scan></a>
             </div>
@@ -25,7 +25,7 @@
                 <b class="navbar-brand">Edit Page</b>
 
 
-                <a href="#/user/:uid/website/:wid/page"><scan class="glyphicon glyphicon-ok floatright navbar-brand"></scan></a>
+                <a href="#/user/{{model.userId}}/website/{{model.webId}}/page" ng-click="model.updatePage(model.page)"><scan class="glyphicon glyphicon-ok floatright navbar-brand"></scan></a>
             </div>
 
         </div>
@@ -40,32 +40,28 @@
 
     <div class="col-sm-3 sidebar">
 
-        <table class="table color-primary">
+        <div ng-repeat="eachpage in model.pages">
+            <table class="table color-primary">
+                <tr>
+                    <td><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{eachpage._id}}/widget">{{eachpage.name}}</a></td>
+                    <td><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{eachpage._id}}"><scan class="glyphicon glyphicon-cog floatright"></scan></a></td>
 
-
-
-            <tr>
-                <td><a href="#/user/:uid/website/:wid/page/:pid/widget">Test Page</a></td>
-                <td><a href="#/user/:uid/website/:wid/page/:pid"><scan class="glyphicon glyphicon-cog floatright"></scan></a></td>
-
-            </tr>
-
-
-
-        </table>
+                </tr>
+            </table>
+        </div>
 
 
     </div>
 
     <div class="col-sm-9 col-sm-offset-3 main">
 
-        <form action="#/user/:uid/website/:wid/page">
+
             <div class="row">
                 <div class="col-sm-9">
 
 
                     <label for="username">Name</label>
-                    <input id="username" ng-model="model.page.username" type="text" class="form-control" placeholder="Page Name">
+                    <input id="username" ng-model="model.page.name" type="text" class="form-control" placeholder="Page Name">
 
 
                 </div>
@@ -86,12 +82,12 @@
                 <div class="col-sm-9">
 
 
-                    <a href="#/user/:uid/website/:wid/page"><button  class="btn btn-danger form-control">Delete</button></a>
+                    <a href="#/user/{{model.userId}}/website/{{model.webId}}/page" ng-click="model.deletePage()"><button  class="btn btn-danger form-control">Delete</button></a>
 
 
                 </div>
             </div>
-        </form>
+
      </div>
 
     </div>
@@ -109,7 +105,7 @@
         <div class="navbar-header navbar-brand">
 
 
-                <a href="#/user/:uid"><scan class="glyphicon glyphicon-user color-primary floatright"></scan></a>
+                <a href="#/user/{{model.userId}}"><scan class="glyphicon glyphicon-user color-primary floatright"></scan></a>
 
 
         </div>

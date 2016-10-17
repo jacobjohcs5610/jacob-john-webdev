@@ -52,8 +52,30 @@
 
             </table>
 
+
+
+
+
+
+
+
+            <div ng-repeat="widget in widgets" ng-switch="widget.widgetType">
+                <div ng-switch-when="HEADING">
+                    <div ng-include="/assignment/views/widget/heading.html"></div>
+                </div>
+                <div ng-switch-when="IMAGE">
+                    <div ng-include="/assignment/views/widget/image.html"></div>
+                </div>
+                <div ng-switch-when="YOUTUBE">
+                    <div ng-include="/assignment/views/widget/youtube.html"></div>
+                </div>
+
+
+            </div>
+
+
             <div ng-repeat="widget in model.widgets">
-                {{widget.name}}
+                <div ng-include="'/assignment/views/widget/'+widget.widgetType+'.html'">{{widget}}</div>
             </div>
 
         </div>

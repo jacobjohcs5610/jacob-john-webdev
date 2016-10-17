@@ -16,24 +16,26 @@
                 { _id: "789", widgetType: "HTML", pageId: "321", text: "<p>Lorem ipsum</p>"}
             ]
         var api = {
-            "createWidget(pageId, widget)"   : "createWidget(pageId, widget)",
-            "findWidgetsByPageId(pageId)" : "findWidgetsByPageId(pageId)",
-            "findWidgetById(widgetId) " : "findWidgetById(widgetId) ",
-            "updateWidget(widgetId, widget)" : "updateWidget(widgetId, widget)",
-            "deleteWidget(widgetId)" : "deleteWidget(widgetId)"
+            "createWidget"   : createWidget,
+            "findWidgetsByPageId" : findWidgetsByPageId,
+            "findWidgetById" : findWidgetById,
+            "updateWidget" : updateWidget,
+            "deleteWidget" : deleteWidget
 
         };
         return api;
         function  createWidget(pageId, widget){
-            widgets.append(widget);
-            widgets[widgets.length-1].pageId = pageId;
+            widget._id = widgets[widgets.length-1]._id + "1";
+            widget.pageId = pageId;
+            widgets.push(widget);
+
         }
 
         function findWidgetsByPageId(pageId) {
-            answer = {};
+            var answer = [];
             for(i=0;i<widgets.length;i++){
-                if(widgets[i].pageId==pageId){
-                    answer.append(widgets[i]);
+                if(widgets[i].pageId===pageId){
+                    answer.push(widgets[i]);
                 }
             }
             return answer;
@@ -41,15 +43,16 @@
 
         function findWidgetById(widgetId) {
             for(i=0;i<widgets.length;i++){
-                if(widgets[i]._id==widgetId){
+                if(widgets[i]._id===widgetId){
                     return widgets[i];
                 }
             }
+            return null;
         }
 
         function updateWidget(widgetId, widget){
             for(i=0;i<widgets.length;i++){
-                if(widgets[i]._id==widgetId){
+                if(widgets[i]._id===widgetId){
                     widgets[i]=widget;
                 }
             }
@@ -58,8 +61,8 @@
 
         function deleteWidget(widgetId) {
             for(i=0;i<widgets.length;i++){
-                if(widgets[i]._id==widgetId){
-                    widgets.splice(i,0);
+                if(widgets[i]._id===widgetId){
+                    widgets.splice(i,1);
                 }
             }
         }

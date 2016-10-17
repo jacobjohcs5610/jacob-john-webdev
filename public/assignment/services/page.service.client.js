@@ -10,24 +10,25 @@
                 { _id: "543", name: "Post 3", websiteId: "456" }
             ]
         var api = {
-            "createPage"   : "createPage",
-            "findPageByWebsiteId" : "findPageByWebsiteId",
-            "findPageById " : "findPageById ",
-            "updatePage" : "updatePage",
-            "deletePage" : "deletePage"
+            "createPage"   : createPage,
+            "findPageByWebsiteId" : findPageByWebsiteId,
+            "findPageById" : findPageById,
+            "updatePage" : updatePage,
+            "deletePage" : deletePage
 
         };
         return api;
         function createPage(websiteId, page) {
-            pages.append(page);
-            pages[pages.length-1].websiteId = websiteId;
+            page.websiteId = websiteId;
+            page._id = pages[pages.length-1]._id + "1";
+            pages.push(page);
         }
 
         function findPageByWebsiteId(websiteId) {
-            answer = {};
+            var answer = [];
             for(i=0;i<pages.length;i++){
-                if(pages[i].websiteId==websiteId){
-                    answer.append(pages[i]);
+                if(pages[i].websiteId===websiteId){
+                    answer.push(pages[i]);
                 }
             }
             return answer;
@@ -35,15 +36,16 @@
 
         function findPageById(pageId) {
             for(i=0;i<pages.length;i++){
-                if(pages[i]._id==pageId){
+                if(pages[i]._id===pageId){
                     return pages[i];
                 }
             }
+            return null;
         }
 
         function updatePage(pageId, page){
             for(i=0;i<pages.length;i++){
-                if(pages[i]._id==pageId){
+                if(pages[i]._id===pageId){
                     pages[i]=page;
                 }
             }
@@ -52,8 +54,8 @@
 
         function deletePage(pageId) {
             for(i=0;i<pages.length;i++){
-                if(pages[i]._id==pageId){
-                    pages.splice(i,0);
+                if(pages[i]._id===pageId){
+                    pages.splice(i,1);
                 }
             }
         }
