@@ -5,14 +5,14 @@
         <div class="navbar-header">
 
 
-                <a href="#/user/:uid/website/:wid/page"> <scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan> </a>
+                <a href="#/user/{{model.userId}}/website/{{model.webId}}/page"> <scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan> </a>
 
                 <b class="navbar-brand">Widgets</b>
 
 
 
 
-            <a href="#/user/:uid/website/:wid/page/:pid/widget/new" class="floatright"><scan class="glyphicon glyphicon-plus navbar-brand"></scan></a>
+            <a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/new" class="floatright"><scan class="glyphicon glyphicon-plus navbar-brand"></scan></a>
         </div>
 
 
@@ -25,58 +25,20 @@
     <div class="row">
         <div class="col-xs-12">
 
-            <table class="table">
-
-
-
-                <tr>
-                    <td><h1>Test Header: Bears</h1></td>
-                    <td><a href="widget-heading.html"><scan class="glyphicon glyphicon-cog floatright color-primary"></scan></a></td>
-                    <td><scan class="glyphicon glyphicon-align-justify floatright"></scan></td>
-                </tr>
-
-                <tr>
-                    <td><img src="https://www.nps.gov/yell/learn/nature/images/jp-gbear-swanlake-960.jpg" alt="bear"></td>
-                    <td><a href="widget-image.html"> <scan class="glyphicon glyphicon-cog floatright color-primary"></scan></a></td>
-                    <td><scan class="glyphicon glyphicon-align-justify floatright"></scan></td>
-                </tr>
-
-                <tr>
-                    <td><video controls><source src="http://www.w3schools.com/html/movie.mp4" type="video/mp4">
-                        Your browser does not support video</video></td>
-                    <td><a href="widget-youtube.html"> <scan class="glyphicon glyphicon-cog floatright color-primary"></scan></a></td>
-                    <td><scan class="glyphicon glyphicon-align-justify floatright"></scan></td>
-                </tr>
-
-
-
-            </table>
-
-
-
-
-
-
-
-
-            <div ng-repeat="widget in widgets" ng-switch="widget.widgetType">
-                <div ng-switch-when="HEADING">
-                    <div ng-include="/assignment/views/widget/heading.html"></div>
-                </div>
-                <div ng-switch-when="IMAGE">
-                    <div ng-include="/assignment/views/widget/image.html"></div>
-                </div>
-                <div ng-switch-when="YOUTUBE">
-                    <div ng-include="/assignment/views/widget/youtube.html"></div>
-                </div>
-
-
-            </div>
 
 
             <div ng-repeat="widget in model.widgets">
-                <div ng-include="'/assignment/views/widget/'+widget.widgetType+'.html'">{{widget}}</div>
+                <table class="table">
+                <tr>
+                    <td ng-include="'/assignment/views/widget/'+widget.widgetType+'.html'"></td>
+
+                    <td class="floatright"><scan class="glyphicon glyphicon-align-justify "></scan></td>
+                    <td class="floatright"><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/{{widget._id}}"> <scan class="glyphicon glyphicon-cog  color-primary"></scan></a></td>
+                </tr>
+                </table>
             </div>
+
+
 
         </div>
     </div>
@@ -110,7 +72,7 @@
 
 
 
-            <a href="#/user/:uid" class="floatright"><scan class="glyphicon glyphicon-user color-primary"></scan></a>
+            <a href="#/user/{{model.userId}}" class="floatright"><scan class="glyphicon glyphicon-user color-primary"></scan></a>
 
 
         </div>

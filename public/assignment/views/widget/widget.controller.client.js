@@ -12,6 +12,15 @@
         vm.userId = $routeParams["uid"];
         function init() {
             vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+            for (var w in vm.widgets){
+                if(vm.widgets[w].widgetType==="HTML"){
+
+                    var div = document.createElement("div");
+                    div.innerHTML = vm.widgets[w].text;
+                    var text = div.textContent || div.innerText || "";
+                    vm.widgets[w].text = text;
+                }
+            }
         }
         init();
     }
