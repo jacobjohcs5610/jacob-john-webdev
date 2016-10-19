@@ -10,6 +10,7 @@
         vm.pageId = $routeParams["pid"];
         vm.webId = $routeParams["wid"];
         vm.userId = $routeParams["uid"];
+
         function init() {
             vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
             for (var w in vm.widgets){
@@ -27,13 +28,20 @@
         }
         init();
     }
-    function NewWidgetController($routeParams) {
+    function NewWidgetController($routeParams, WidgetService) {
         var vm = this;
-
+        vm.addWidget = addWidget;
 
         vm.pageId = $routeParams["pid"];
         vm.webId = $routeParams["wid"];
         vm.userId = $routeParams["uid"];
+
+        function addWidget(widgetType){
+            var widget = {widgetType: widgetType};
+            WidgetService.createWidget(vm.pageId, widget);
+            vm.widgetId = widget._id;
+        }
+
 
 
     }
@@ -46,6 +54,7 @@
         vm.pageId = $routeParams["pid"];
         vm.webId = $routeParams["wid"];
         vm.userId = $routeParams["uid"];
+
         function init() {
             vm.widget = WidgetService.findWidgetById(vm.widgetId);
         }
