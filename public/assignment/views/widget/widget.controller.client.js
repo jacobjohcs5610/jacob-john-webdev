@@ -20,15 +20,28 @@
                     var text = div.textContent || div.innerText || "";
                     vm.widgets[w].text = text;
                 }
+                if(vm.widgets[w].widgetType=="HEADER"){
+                    vm.widgets[w].widgetType = "HEADING";
+                }
             }
         }
         init();
     }
-    function NewWidgetController() {
+    function NewWidgetController($routeParams) {
+        var vm = this;
+
+
+        vm.pageId = $routeParams["pid"];
+        vm.webId = $routeParams["wid"];
+        vm.userId = $routeParams["uid"];
+
 
     }
     function EditWidgetController($routeParams, WidgetService) {
         var vm = this;
+        vm.deleteWidget = deleteWidget;
+        vm.updateWidget = updateWidget;
+
         vm.widgetId = $routeParams["wgid"];
         vm.pageId = $routeParams["pid"];
         vm.webId = $routeParams["wid"];
@@ -38,6 +51,13 @@
         }
         init();
 
+        function deleteWidget(){
+            WidgetService.deleteWidget(vm.widgetId);
+        }
+
+        function updateWidget(){
+            WidgetService.updateWidget(vm.widgetId, vm.widget);
+        }
 
     }
 

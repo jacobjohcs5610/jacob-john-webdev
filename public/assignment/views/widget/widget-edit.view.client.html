@@ -3,30 +3,22 @@
     <div class="container-fluid ">
         <div class="navbar-header ">
 
-            <a href="#/user/{{model.userId}}/website/:wid/page/:pid/widget"><scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan></a>
+            <a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget"><scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan></a>
 
             <b class="navbar-brand">Widget Edit</b>
 
 
 
-            <a href="#/user/:uid/website/:wid/page/:pid/widget"><scan class="glyphicon glyphicon-ok navbar-brand floatright"></scan></a>
+            <a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget" ng-click="model.updateWidget()"><scan class="glyphicon glyphicon-ok navbar-brand floatright"></scan></a>
         </div>
 
 
     </div>
 </nav>
 
-<div ng-switch="widget.widgetType">
-    <div ng-switch-when="HEADING">
-        <ng-include src="'widget-heading.view.client.html'"></ng-include>
-    </div>
-    <div ng-switch-when="IMAGE">
-        <ng-include src="'widget-image.view.client.html'"></ng-include>
-    </div>
-    <div ng-switch-when="YOUTUBE">
-        <ng-include src="'widget-youtube.view.client.html'"></ng-include>
-    </div>
-</div>
+
+
+<div ng-include="'/assignment/views/widget/widget-'+model.widget.widgetType+'.view.client.html'"></div>
 
 
 <nav class="navbar navbar-default navbar-fixed-bottom ">
@@ -34,7 +26,7 @@
         <div class="navbar-header navbar-brand">
 
 
-            <a href="#/user/:uid"><scan class="glyphicon glyphicon-user color-primary floatright"></scan></a>
+            <a href="#/user/{{model.userId}}"><scan class="glyphicon glyphicon-user color-primary floatright"></scan></a>
 
 
         </div>

@@ -5,7 +5,7 @@
         <div class="navbar-header ">
 
 
-                <a href="#/user/:uid/website/:wid/page/:pid/widget"> <scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan> </a>
+                <a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget"> <scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan> </a>
 
                 <b class="navbar-brand">Choose Widget</b>
 
@@ -30,13 +30,13 @@
 
 
                 <tr>
-                    <td><a href="widget-heading.html">Header</a></td>
+                    <td><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">Header</a></td>
                 </tr>
                 <tr>
-                    <td><a href="widget-image.html">Image</a></td>
+                    <td><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">Image</a></td>
                 </tr>
                 <tr>
-                    <td><a href="widget-youtube.html">Youtube</a></td>
+                    <td><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">Youtube</a></td>
                 </tr>
 
 
@@ -69,7 +69,7 @@
         <div class="navbar-header navbar-brand ">
 
 
-                <a href="#/user/:uid"><scan class="glyphicon glyphicon-user color-primary floatright"></scan></a>
+                <a href="#/user/{{model.userId}}"><scan class="glyphicon glyphicon-user color-primary floatright"></scan></a>
 
 
         </div>
