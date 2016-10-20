@@ -25,15 +25,15 @@
 
 
 
-            <div ng-repeat="page in model.pages">
+
                 <table class="table color-primary">
-                    <tr>
+                    <tr ng-repeat="page in model.pages">
                         <td><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{page._id}}/widget">{{page.name}}</a></td>
                         <td><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{page._id}}"><scan class="glyphicon glyphicon-cog floatright"></scan></a></td>
 
                     </tr>
                 </table>
-            </div>
+
 
         </div>
     </div>

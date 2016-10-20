@@ -27,17 +27,74 @@
 
 
 
-            <div ng-repeat="widget in model.widgets">
+<!--
                 <table class="table">
-                <tr>
-                    <td ng-include="'/assignment/views/widget/'+widget.widgetType+'.html'"></td>
+                    <tr ng-repeat="widget in model.widgets">
+                        <td ng-include="'/assignment/views/widget/'+widget.widgetType+'.html'"></td>
 
-                    <td class="floatright"><scan class="glyphicon glyphicon-align-justify "></scan></td>
-                    <td class="floatright"><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/{{widget._id}}"> <scan class="glyphicon glyphicon-cog  color-primary"></scan></a></td>
-                </tr>
+                        <td class="floatright"><scan class="glyphicon glyphicon-align-justify "></scan></td>
+                        <td class="floatright"><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/{{widget._id}}"> <scan class="glyphicon glyphicon-cog  color-primary"></scan></a></td>
+                    </tr>
                 </table>
-            </div>
+-->
+            <!--
+                <table class="table">
+                    <tr  ng-switch="widget.widgetType" ng-repeat="widget in model.widgets">
+                        <div ng-switch="widget.size" ng-switch-when="HEADING" >
+                                <h1 ng-switch-when="1">
+                                    {{widget.text}}
+                                </h1>
+                                <h2 ng-switch-when="2">
+                                    {{widget.text}}
+                                </h2>
+                                <h3 ng-switch-when="3">
+                                    {{widget.text}}
+                                </h3>
+                                <h4 ng-switch-when="4">
+                                    {{widget.text}}
+                                </h4>
+                                <h5 ng-switch-when="5">
+                                    {{widget.text}}
+                                </h5>
+                                <h6 ng-switch-when="6">
+                                    {{widget.text}}
+                                </h6>
 
+                        </div>
+                        <span ng-switch-when="HTML" ng-bind-html="model.checkSafeHtml(widget.text)">
+
+                        </span>
+                    </tr>
+                </table>
+
+                -->
+            <table class="table">
+            <tr ng-switch="widget.widgetType"
+                 ng-repeat="widget in model.widgets">
+
+                <td ng-switch="widget.size" ng-switch-when="HEADING">
+                    <h1 ng-switch-when="1">{{widget.text}}</h1>
+                    <h2 ng-switch-when="2">{{widget.text}}</h2>
+                    <h3 ng-switch-when="3">{{widget.text}}</h3>
+                    <h4 ng-switch-when="4">{{widget.text}}</h4>
+                    <h5 ng-switch-when="5">{{widget.text}}</h5>
+                    <h6 ng-switch-when="6">{{widget.text}}</h6>
+                </td>
+                <td ng-switch-when="YOUTUBE">
+                    <iframe width="560" height="315"
+                            ng-src="{{model.checkSafeYouTubeUrl(widget.url)}}"
+                            frameborder="0" allowfullscreen></iframe>
+                </td>
+                <td ng-switch-when="IMAGE">
+                    <img ng-src="{{model.checkSafeImageUrl(widget.url)}}" >
+                </td>
+                <td ng-switch-when="HTML" ng-bind-html="model.checkSafeHtml(widget.text)">
+                </td>
+                <td class="floatright"><scan class="glyphicon glyphicon-align-justify "></scan></td>
+                <td class="floatright"><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/{{widget._id}}"> <scan class="glyphicon glyphicon-cog  color-primary"></scan></a></td>
+
+            </tr>
+            </table>
 
 
         </div>

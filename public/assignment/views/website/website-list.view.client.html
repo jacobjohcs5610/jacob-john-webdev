@@ -27,15 +27,15 @@
 
 
 
-            <div ng-repeat="website in model.websites">
+
                 <table class="table color-primary">
-                    <tr>
+                    <tr ng-repeat="website in model.websites">
                         <td><a href="#/user/{{model.userId}}/website/{{website._id}}/page">{{website.name}}</a></td>
                         <td><a href="#/user/{{model.userId}}/website/{{website._id}}"  class="floatright"><scan class="glyphicon glyphicon-cog"></scan></td></a>
 
                     </tr>
                 </table>
-            </div>
+
 
         </div>
     </div>

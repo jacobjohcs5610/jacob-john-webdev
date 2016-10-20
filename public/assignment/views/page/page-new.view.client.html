@@ -40,15 +40,15 @@
 
         <div class="col-sm-3 sidebar">
 
-            <div ng-repeat="eachpage in model.pages">
+
                 <table class="table color-primary">
-                    <tr>
+                    <tr ng-repeat="eachpage in model.pages">
                         <td><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{eachpage._id}}/widget">{{eachpage.name}}</a></td>
                         <td><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{eachpage._id}}"><scan class="glyphicon glyphicon-cog floatright"></scan></a></td>
 
                     </tr>
                 </table>
-            </div>
+
 
 
         </div>

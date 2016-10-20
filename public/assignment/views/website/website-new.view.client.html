@@ -39,15 +39,14 @@
 
         <div class="col-sm-3 col-md-2 sidebar">
 
-            <div ng-repeat="eachwebsite in model.websites">
+
                 <table class="table color-primary">
-                    <tr>
+                    <tr ng-repeat="eachwebsite in model.websites">
                         <td><a href="#/user/{{model.userId}}/website/{{eachwebsite._id}}/page">{{eachwebsite.name}}</a></td>
                         <td><a href="#/user/{{model.userId}}/website/{{eachwebsite._id}}"  class="floatright"><scan class="glyphicon glyphicon-cog"></scan></td></a>
 
                     </tr>
                 </table>
-            </div>
 
 
         </div>
