@@ -26,14 +26,14 @@
                     var text = div.textContent || div.innerText || "";
                     vm.widgets[w].text = text;
                 }*/
-                if(vm.widgets[w].widgetType=="HEADER"){
+                if(vm.widgets[w].widgetType=="HEADER" || vm.widgets[w].widgetType=="HEADING"){
                     vm.widgets[w].widgetType = "heading";
                 } else if(vm.widgets[w].widgetType=="IMAGE"){
                     vm.widgets[w].widgetType = "image";
                 } else if(vm.widgets[w].widgetType=="YOUTUBE"){
                     vm.widgets[w].widgetType = "youtube";
                 } else{
-                    vm.widgets[w].widgetType = "html";
+
                 }
             }
 

@@ -88,7 +88,7 @@
                 <td ng-switch-when="image">
                     <img ng-src="{{model.checkSafeImageUrl(widget.url)}}" >
                 </td>
-                <td ng-switch-when="html" ng-bind-html="model.checkSafeHtml(widget.text)">
+                <td ng-switch-when="HTML" ng-bind-html="model.checkSafeHtml(widget.text)">
                 </td>
                 <td class="floatright"><scan class="glyphicon glyphicon-align-justify "></scan></td>
                 <td class="floatright"><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/{{widget._id}}"> <scan class="glyphicon glyphicon-cog  color-primary"></scan></a></td>
