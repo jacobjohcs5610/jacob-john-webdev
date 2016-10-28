@@ -11,7 +11,10 @@
         vm.userId = $routeParams["uid"];
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.webId);
+            PageService.findPageByWebsiteId(vm.webId)
+                .success(function(pageList){
+                    vm.pages=pageList;
+                });
         }
         init();
     }
@@ -24,13 +27,17 @@
 
         function init() {
 
-            vm.pages = PageService.findPageByWebsiteId(vm.webId);
+            PageService.findPageByWebsiteId(vm.webId)
+                .success(function(pageList){
+                    vm.pages = pageList;
+                });
 
         }
         init();
 
         function addPage(page){
-            PageService.createPage(vm.webId,page);
+            PageService.createPage(vm.webId,page)
+
         }
 
 
@@ -46,13 +53,22 @@
         vm.pageId = $routeParams["pid"];
         function init() {
 
-            vm.pages = PageService.findPageByWebsiteId(vm.webId);
-            vm.page = PageService.findPageById(vm.pageId);
+            PageService.findPageByWebsiteId(vm.webId)
+                .success(function(pageList){
+                    vm.pages = pageList;
+                }
+            );
+            PageService.findPageById(vm.pageId)
+                .success(function(pageList){
+                    vm.page = pageList;
+                }
+            );
         }
         init();
 
         function deletePage(){
             PageService.deletePage(vm.pageId);
+
         }
 
         function updatePage(page){

@@ -2,13 +2,8 @@
     angular
         .module("WebAppMaker")
         .factory("PageService", PageService);
-    function PageService() {
-        var pages =
-            [
-                { _id: "321", name: "Post 1", websiteId: "456" },
-                { _id: "432", name: "Post 2", websiteId: "456" },
-                { _id: "543", name: "Post 3", websiteId: "456" }
-            ]
+    function PageService($http) {
+
         var api = {
             "createPage"   : createPage,
             "findPageByWebsiteId" : findPageByWebsiteId,
@@ -19,45 +14,35 @@
         };
         return api;
         function createPage(websiteId, page) {
+
             page.websiteId = websiteId;
-            page._id = pages[pages.length-1]._id + "1";
-            pages.push(page);
+            return $http.post("/api/website/"+websiteId+"/page",page);
         }
 
         function findPageByWebsiteId(websiteId) {
-            var answer = [];
-            for(i=0;i<pages.length;i++){
-                if(pages[i].websiteId===websiteId){
-                    answer.push(pages[i]);
-                }
-            }
-            return answer;
+
+
+            return $http.get("/api/website/"+websiteId+"/page");
         }
 
         function findPageById(pageId) {
-            for(i=0;i<pages.length;i++){
-                if(pages[i]._id===pageId){
-                    return pages[i];
-                }
-            }
-            return null;
+
+
+            return $http.get("/api/page/"+pageId);
         }
 
         function updatePage(pageId, page){
-            for(i=0;i<pages.length;i++){
-                if(pages[i]._id===pageId){
-                    pages[i]=page;
-                }
-            }
+
+
+            return $http.put("/api/page/"+pageId,page);
         }
 
 
         function deletePage(pageId) {
-            for(i=0;i<pages.length;i++){
-                if(pages[i]._id===pageId){
-                    pages.splice(i,1);
-                }
-            }
+
+
+            return $http.delete("/api/page/"+pageId);
+
         }
 
 

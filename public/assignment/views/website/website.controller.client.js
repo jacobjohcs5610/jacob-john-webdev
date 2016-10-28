@@ -11,7 +11,12 @@
 
         vm.userId = $routeParams["uid"];
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+            WebsiteService.findWebsitesByUser(vm.userId)
+            .success(
+                function(websiteList){
+                    vm.websites=websiteList
+                }
+            );
         }
         init();
 
@@ -24,12 +29,18 @@
         vm.userId = $routeParams["uid"];
 
         function init(){
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+            WebsiteService.findWebsitesByUser(vm.userId)
+                .success(
+                    function(websiteList){
+                        vm.websites=websiteList
+                    }
+                );
         }
 
         init();
 
         function addWebsite(website){
+            website.developerId = vm.userId;
             WebsiteService.createWebsite(vm.userId,website);
         }
     }
@@ -45,8 +56,18 @@
         vm.webId = $routeParams["wid"];
         vm.userId = $routeParams["uid"];
         function init(){
-            vm.website = WebsiteService.findWebsiteById(vm.webId);
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+            WebsiteService.findWebsiteById(vm.webId)
+                .success(
+                    function(websiteAns){
+                        vm.website = websiteAns;
+                    }
+                );
+            WebsiteService.findWebsitesByUser(vm.userId)
+                .success(
+                    function(websiteList){
+                        vm.websites=websiteList
+                    }
+                );
         }
 
         init();
@@ -56,6 +77,7 @@
         }
 
         function updateWebsite(website) {
+            website.developerId = vm.userId;
             WebsiteService.updateWebsite(vm.webId, website);
         }
     }

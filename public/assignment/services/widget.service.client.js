@@ -2,8 +2,8 @@
     angular
         .module("WebAppMaker")
         .factory("WidgetService", WidgetService);
-    function WidgetService() {
-        var widgets =
+    function WidgetService($http) {
+        /*var widgets =
             [
                 { _id: "123", widgetType: "HEADER", pageId: "321", size: 2, text: "GIZMODO"},
                 { _id: "234", widgetType: "HEADER", pageId: "321", size: 4, text: "Lorem ipsum"},
@@ -14,7 +14,7 @@
                 { _id: "678", widgetType: "YOUTUBE", pageId: "321", width: "100%",
                     url: "https://youtu.be/AM2Ivdi9c4E" },
                 { _id: "789", widgetType: "HTML", pageId: "321", text: "<p>Lorem ipsum</p>"}
-            ]
+            ]*/
         var api = {
             "createWidget"   : createWidget,
             "findWidgetsByPageId" : findWidgetsByPageId,
@@ -25,46 +25,55 @@
         };
         return api;
         function  createWidget(pageId, widget){
-            widget._id = widgets[widgets.length-1]._id + "1";
-            widget.pageId = pageId;
-            widgets.push(widget);
 
+            widget.pageId = pageId;
+
+
+            return $http.post("/api/page/"+pageId+"/widget", widget);
         }
 
         function findWidgetsByPageId(pageId) {
-            var answer = [];
-            for(i=0;i<widgets.length;i++){
-                if(widgets[i].pageId===pageId){
-                    answer.push(widgets[i]);
-                }
-            }
-            return answer;
+            //var answer = [];
+            //for(i=0;i<widgets.length;i++){
+             //   if(widgets[i].pageId===pageId){
+             //       answer.push(widgets[i]);
+             //   }
+            //}
+            //return answer;
+
+            return $http.get("/api/page/"+pageId+"/widget");
         }
 
         function findWidgetById(widgetId) {
-            for(i=0;i<widgets.length;i++){
-                if(widgets[i]._id===widgetId){
-                    return widgets[i];
-                }
-            }
-            return null;
+           // for(i=0;i<widgets.length;i++){
+           //     if(widgets[i]._id===widgetId){
+            //        return widgets[i];
+           //     }
+           // }
+           // return null;
+
+            return $http.get("/api/widget/"+widgetId);
         }
 
         function updateWidget(widgetId, widget){
-            for(i=0;i<widgets.length;i++){
-                if(widgets[i]._id===widgetId){
-                    widgets[i]=widget;
-                }
-            }
+         //   for(i=0;i<widgets.length;i++){
+         //       if(widgets[i]._id===widgetId){
+         //           widgets[i]=widget;
+         //       }
+         //   }
+
+            return $http.put("/api/widget/"+widgetId, widget);
         }
 
 
         function deleteWidget(widgetId) {
-            for(i=0;i<widgets.length;i++){
-                if(widgets[i]._id===widgetId){
-                    widgets.splice(i,1);
-                }
-            }
+           // for(i=0;i<widgets.length;i++){
+           //     if(widgets[i]._id===widgetId){
+           //         widgets.splice(i,1);
+           //     }
+           // }
+
+            return $http.delete("/api/widget/"+widgetId);
         }
 
 

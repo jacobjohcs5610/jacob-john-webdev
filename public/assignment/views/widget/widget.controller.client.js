@@ -16,26 +16,30 @@
         vm.checkSafeImageUrl = checkSafeImageUrl;
 
         function init() {
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+            WidgetService.findWidgetsByPageId(vm.pageId)
+                .success(function(widgetAns) {
+                    vm.widgets = widgetAns;
+                    
 
-            for (var w in vm.widgets){
-              /*  if(vm.widgets[w].widgetType==="HTML"){
+                    for (var w in vm.widgets) {
+                        /*  if(vm.widgets[w].widgetType==="HTML"){
 
-                    var div = document.createElement("div");
-                    div.innerHTML = vm.widgets[w].text;
-                    var text = div.textContent || div.innerText || "";
-                    vm.widgets[w].text = text;
-                }*/
-                if(vm.widgets[w].widgetType=="HEADER" || vm.widgets[w].widgetType=="HEADING"){
-                    vm.widgets[w].widgetType = "heading";
-                } else if(vm.widgets[w].widgetType=="IMAGE"){
-                    vm.widgets[w].widgetType = "image";
-                } else if(vm.widgets[w].widgetType=="YOUTUBE"){
-                    vm.widgets[w].widgetType = "youtube";
-                } else{
+                         var div = document.createElement("div");
+                         div.innerHTML = vm.widgets[w].text;
+                         var text = div.textContent || div.innerText || "";
+                         vm.widgets[w].text = text;
+                         }*/
+                        if (vm.widgets[w].widgetType == "HEADER" || vm.widgets[w].widgetType == "HEADING") {
+                            vm.widgets[w].widgetType = "heading";
+                        } else if (vm.widgets[w].widgetType == "IMAGE") {
+                            vm.widgets[w].widgetType = "image";
+                        } else if (vm.widgets[w].widgetType == "YOUTUBE") {
+                            vm.widgets[w].widgetType = "youtube";
+                        } else {
 
-                }
-            }
+                        }
+                    }
+                });
 
         }
         init();
@@ -66,8 +70,11 @@
 
         function addWidget(widgetType){
             var widget = {widgetType: widgetType};
-            WidgetService.createWidget(vm.pageId, widget);
-            vm.widgetId = widget._id;
+            WidgetService.createWidget(vm.pageId, widget)
+                .success(function(newWidget){
+                    vm.widgetId = newWidget._id;
+                });
+            //vm.widgetId = widget._id;
         }
 
 
@@ -84,7 +91,10 @@
         vm.userId = $routeParams["uid"];
 
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            WidgetService.findWidgetById(vm.widgetId)
+                .success(function(widgetAns){
+                    vm.widget = widgetAns;
+                });
         }
         init();
 
