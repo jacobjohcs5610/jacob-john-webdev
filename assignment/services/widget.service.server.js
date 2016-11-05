@@ -144,4 +144,14 @@ module.exports = function (app){
 
         res.send(true);
     }
+
+    app.put("/page/:pageId/widget",sortWidgets);
+
+    function sortWidgets(req, res){
+        var start = req.query.initial;
+        var end = req.query.final;
+        widgets = req.body;
+
+        res.json(widgets);
+    }
 }

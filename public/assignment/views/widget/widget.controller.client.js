@@ -1,6 +1,6 @@
 (function() {
     angular
-        .module("WebAppMaker"/*, ["jgaDirectives"]*/)
+        .module("WebAppMaker")
         .controller("WidgetListController", WidgetListController)
         .controller("NewWidgetController", NewWidgetController)
         .controller("EditWidgetController", EditWidgetController)
@@ -14,7 +14,7 @@
         vm.checkSafeHtml = checkSafeHtml;
         vm.checkSafeYouTubeUrl = checkSafeYouTubeUrl;
         vm.checkSafeImageUrl = checkSafeImageUrl;
-        /*vm.sortItem = sortItem;*/
+        vm.sortItem = sortItem;
 
         function init() {
             WidgetService.findWidgetsByPageId(vm.pageId)
@@ -44,23 +44,24 @@
 
         }
         init();
-        /*
-        function sortItem(start, end, WebService) {
-            console.log("start: " + start);
-            console.log("end: " + end);
+
+        function sortItem(start, end) {
+
 
             var moved = vm.widgets.splice(start, 1)[0];
-            //var moved = vm.items.splice(start, 1);
-            //console.log("moved: " + moved.first);
+
 
             vm.widgets.splice(end, 0,moved );
 
-            for(var i in vm.items){
-                console.log(vm.widgets[i]);
-            }
 
 
-        }*/
+            WidgetService.sortWidgets(vm.widgets,vm.pageId,start,end)
+                .success(function(widgetList){
+                    vm.widgets = widgetList;
+                })
+
+
+        }
 
         function checkSafeHtml(html) {
             return $sce.trustAsHtml(html);

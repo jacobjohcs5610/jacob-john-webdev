@@ -1,4 +1,4 @@
-/*(function(){
+(function(){
     angular
         .module("jgaDirectives", [])
         .directive("jgaSortable", jgaSortable);
@@ -30,4 +30,4 @@
             link: link
         };
     }
-})();*/
+})();

@@ -27,11 +27,12 @@
 
 
 
-            <table class="table">
-            <!--table class="table" jga-sortable
-                   jga-sortable-callback="model.sortItem(start, end)"-->
-            <tr ng-switch="widget.widgetType"
-                 ng-repeat="widget in model.widgets">
+            <!--table class="table"-->
+            <table class="table" >
+                <tbody jga-sortable
+                       jga-sortable-callback="model.sortItem(start, end)">
+                <tr ng-switch="widget.widgetType"
+                     ng-repeat="widget in model.widgets" >
 
                 <td ng-switch="widget.size" ng-switch-when="heading">
                     <h1 ng-switch-when="1">{{widget.text}}</h1>
@@ -54,7 +55,8 @@
                 <td class="floatright"><scan class="glyphicon glyphicon-align-justify "></scan></td>
                 <td class="floatright"><a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/{{widget._id}}"> <scan class="glyphicon glyphicon-cog  color-primary"></scan></a></td>
 
-            </tr>
+                </tr>
+                </tbody>
             </table>
 
 
