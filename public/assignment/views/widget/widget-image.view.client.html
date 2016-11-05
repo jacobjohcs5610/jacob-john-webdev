@@ -21,7 +21,7 @@
 
 -->
 
-<div class="container">
+<div class="container" >
 
 
     <div class="row">
@@ -72,19 +72,30 @@
         <div class="col-xs-12">
 
 
-                <label for="upload">Upload</label>
-                <input id="upload" type="file" class="form-control">
+                <label >Upload</label>
 
 
-        </div>
-    </div>
+            <form action="/api/upload" onsubmit="model.uploadImage()"   method="post" enctype="multipart/form-data">
+                <input  name="myFile"   type="file" class="form-control"/>
+                <input  name="width"    value="{{model.widget.width}}" style="display: none"/>
+                <input  name="widgetId" value="{{model.widget._id}}"   style="display: none"/>
+                <input  name="pageId"   value="{{model.pageId}}"       style="display: none"/>
+                <input  name="webId"    value="{{model.webId}}"        style="display: none"/>
+                <input  name="userId"   value="{{model.userId}}"       style="display: none"/>
+
+                    <button   type="submit"  class="btn btn-block btn-primary" >Upload Image</button>
 
 
-    <div class="row">
-        <div class="col-xs-12">
+            </form>
+
+            <!--script>
+                function toClick($location){
+                    $location.url("user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget");
+                }
+            </script-->
 
 
-                <button type="submit" class="btn btn-primary form-control">Upload Image</button>
+            <!--button type="submit" class="btn btn-primary form-control">Upload Image</button-->
 
 
         </div>

@@ -13,6 +13,49 @@ module.exports = function (app){
             { _id: "789", widgetType: "HTML", pageId: "321", text: "<p>Lorem ipsum</p>"}
         ];
 
+    var tempImages = [];
+
+    var multer = require('multer'); // npm install multer --save
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
+    app.delete("/api/upload",deleteTemp);
+
+    function deleteTemp(req,res){
+        tempImages = [];
+        res.send(true);
+    }
+
+
+    app.post ("/api/upload", upload.single('myFile'), uploadImage);
+
+
+    function uploadImage(req, res) {
+
+
+        var widgetId      = req.body.widgetId;
+        var width         = req.body.width;
+        var pageId        = req.body.pageId;
+        var webId         = req.body.webId;
+        var userId        = req.body.userId;
+        var myFile        = req.file;
+
+
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+
+
+        var temp = {_id: widgetId, widgetType: "image", pageId: pageId, width: width, url: "\\uploads\\" + filename};
+
+        tempImages.push(temp);
+
+        res.redirect('../assignment/index.html#/user/'+userId+'/website/'+webId+'/page/'+pageId+'/widget/'+widgetId);
+
+    }
+
 
     app.post("/api/page/:pageId/widget", createWidget);
 
@@ -75,9 +118,16 @@ module.exports = function (app){
         var widgetUpdate = req.body;
         for (i = 0; i < widgets.length; i++) {
             if (widgets[i]._id === widgetId) {
-                widgets[i] = widgetUpdate;
+                if(tempImages.length==0) {
+                    widgets[i] = widgetUpdate;
+                }else{
+                    widgets[i] = tempImages[0];
+                    tempImages = [];
+                }
             }
         }
+
+
         res.json(widgetUpdate);
     }
 

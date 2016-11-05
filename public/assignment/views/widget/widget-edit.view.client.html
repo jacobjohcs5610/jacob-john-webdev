@@ -3,7 +3,7 @@
     <div class="container-fluid ">
         <div class="navbar-header ">
 
-            <a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget"><scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan></a>
+            <a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget" ng-click="model.deleteTemp()"><scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan></a>
 
             <b class="navbar-brand">Widget Edit</b>
 
@@ -26,7 +26,7 @@
         <div class="navbar-header navbar-brand">
 
 
-            <a href="#/user/{{model.userId}}"><scan class="glyphicon glyphicon-user color-primary floatright"></scan></a>
+            <a href="#/user/{{model.userId}}" ng-click="model.deleteTemp()"><scan class="glyphicon glyphicon-user color-primary floatright"></scan></a>
 
 
         </div>

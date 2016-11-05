@@ -1,6 +1,6 @@
 (function() {
     angular
-        .module("WebAppMaker")
+        .module("WebAppMaker", ["jgaDirectives"])
         .controller("WidgetListController", WidgetListController)
         .controller("NewWidgetController", NewWidgetController)
         .controller("EditWidgetController", EditWidgetController)
@@ -14,12 +14,13 @@
         vm.checkSafeHtml = checkSafeHtml;
         vm.checkSafeYouTubeUrl = checkSafeYouTubeUrl;
         vm.checkSafeImageUrl = checkSafeImageUrl;
+        vm.sortItem = sortItem;
 
         function init() {
             WidgetService.findWidgetsByPageId(vm.pageId)
                 .success(function(widgetAns) {
                     vm.widgets = widgetAns;
-                    
+
 
                     for (var w in vm.widgets) {
                         /*  if(vm.widgets[w].widgetType==="HTML"){
@@ -43,6 +44,23 @@
 
         }
         init();
+
+        function sortItem(start, end, WebService) {
+            console.log("start: " + start);
+            console.log("end: " + end);
+
+            var moved = vm.widgets.splice(start, 1)[0];
+            //var moved = vm.items.splice(start, 1);
+            //console.log("moved: " + moved.first);
+
+            vm.widgets.splice(end, 0,moved );
+
+            for(var i in vm.items){
+                console.log(vm.widgets[i]);
+            }
+
+
+        }
 
         function checkSafeHtml(html) {
             return $sce.trustAsHtml(html);
@@ -80,10 +98,11 @@
 
 
     }
-    function EditWidgetController($routeParams, WidgetService) {
+    function EditWidgetController($routeParams, WidgetService, $location) {
         var vm = this;
         vm.deleteWidget = deleteWidget;
         vm.updateWidget = updateWidget;
+        vm.deleteTemp = deleteTemp;
 
         vm.widgetId = $routeParams["wgid"];
         vm.pageId = $routeParams["pid"];
@@ -104,6 +123,12 @@
 
         function updateWidget(){
             WidgetService.updateWidget(vm.widgetId, vm.widget);
+        }
+
+        function deleteTemp(){
+
+
+            WidgetService.deleteTemp();
         }
 
     }

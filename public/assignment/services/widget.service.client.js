@@ -20,7 +20,8 @@
             "findWidgetsByPageId" : findWidgetsByPageId,
             "findWidgetById" : findWidgetById,
             "updateWidget" : updateWidget,
-            "deleteWidget" : deleteWidget
+            "deleteWidget" : deleteWidget,
+            "deleteTemp" : deleteTemp
 
         };
         return api;
@@ -77,6 +78,9 @@
         }
 
 
+        function deleteTemp(){
+            return $http.delete("/api/upload");
+        }
 
 
     }
