@@ -36,9 +36,9 @@
                             vm.widgets[w].widgetType = "image";
                         } else if (vm.widgets[w].widgetType == "YOUTUBE") {
                             vm.widgets[w].widgetType = "youtube";
-                        } else {
-
-                        }
+                        } else if(vm.widgets[w].widgetType == "HTML") {
+                            vm.widgets[w].widgetType = "html";
+                        } else {}
                     }
                 });
 

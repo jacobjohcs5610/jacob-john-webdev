@@ -1,4 +1,4 @@
-module.exports = function(app){
+module.exports = function(app/*, UserModel*/){
 
     
        // function UserServerService() {
@@ -34,7 +34,10 @@ module.exports = function(app){
                 }
 
                 users.push(user);
-                res.json(user);
+               /* UserModel.createUser(req.body)
+                    .success(function(user) {
+                        res.json(user);
+                    });*/
 
 
             }
