@@ -1,11 +1,19 @@
 module.exports = function(mongoose){
 
+    //var mongoose = require('mongoose');
 
-    var UserSchema = require('user.schema.server.js');
+    var UserSchema = require('./user.schema.server.js')(mongoose);
+
+
     var UserModel = mongoose.model("UserModel", UserSchema);
 
     var api = {
-        createUser: "createUser"
+        createUser: createUser,
+        findUserByCredentials: findUserByCredentials,
+        findUserByUsername: findUserByUsername,
+        findUserById: findUserById,
+        updateUser: updateUser,
+        deleteUser: deleteUser
     };
 
     return api;
@@ -13,15 +21,37 @@ module.exports = function(mongoose){
 
 
     function createUser(user){
-        UserModel.createUser(user)
-            .then(
-                function(ans){
-                    res.json(ans);
-                }
-                /*function(err){
-                    res.status(400).send(err);
-                }*/
-            );
+        return UserModel.create(user);
+
+    }
+
+    function findUserByCredentials(username,password){
+        return UserModel.find({username: username, password: password});
+    }
+
+    function findUserByUsername(username){
+        return UserModel.find({username: username});
+    }
+
+    function findUserById(userId){
+        return UserModel.find({_id: userId});
+    }
+
+    function updateUser(userId, user){
+        return UserModel.update(
+            {_id: userId},
+            {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email
+            }
+        );
+    }
+
+    function deleteUser(userId){
+        return UserModel.remove(
+            {_id: userId}
+        );
     }
 
 

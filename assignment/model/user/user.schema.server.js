@@ -1,4 +1,5 @@
 module.exports=function(mongoose){
+    //var mongoose = require("mongoose");
     var UserSchema = mongoose.Schema({
         username: String,
         password: String,
@@ -6,7 +7,9 @@ module.exports=function(mongoose){
         lastName: String,
         email: String,
         phone: String,
-        websites: [Website],
+        //websites: [Website],
         dateCreated: Date
     });
+
+    return UserSchema;
 };
