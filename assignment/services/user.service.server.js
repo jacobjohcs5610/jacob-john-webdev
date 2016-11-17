@@ -34,11 +34,7 @@ module.exports = function(app, model){
 
             function findUserByCredentials(req,res){
                 var userAnswer = null;
-            /*    for(i=0;i<users.length;i++){
-                    if(users[i].username===req.query.username && users[i].password===req.query.password){
-                        userAnswer = users[i];
-                    }
-                }*/
+
                 var username = req.query.username;
                 var password = req.query.password;
                 model.userModel.findUserByCredentials(username,password)
@@ -61,16 +57,7 @@ module.exports = function(app, model){
             }
 
             function findUserByUsername(req,res){
-                /*var userAnswer = null;
-                for(i=0;i<users.length;i++){
-                    if(users[i].username===req.query.username){
-                        userAnswer = users[i];
 
-                    }
-                }
-                console.log(userAnswer);*/
-
-               // res.json(userAnswer);
 
                 var username = req.query.username;
                 model.userModel.findUserByUsername(username)
@@ -93,14 +80,7 @@ module.exports = function(app, model){
             app.get("/api/user/:userId", findUserById);
 
             function findUserById(req, res){
-             /*   var userId = req.params.userId;
-                var user = null;
-                for (i = 0; i<users.length; i++){
-                    if(users[i]._id===userId){
-                        user = users[i];
-                    }
-                }
-                res.json(user);*/
+
                 var userId = req.params.userId;
                 model.userModel.findUserById(userId)
                     .then(
@@ -120,13 +100,7 @@ module.exports = function(app, model){
             app.put("/api/user/:userId", updateUser );
 
             function updateUser(req, res){
-                /*var userId = req.params.userId;
-                for(i = 0; i<users.length; i++){
-                    if(users[i]._id===userId){
-                        users[i] = req.body;
-                    }
-                }
-                res.json(req.body);*/
+
                 var userId = req.params.userId;
                 var userUpdate = req.body;
                 model.userModel.updateUser(userId, userUpdate)
@@ -143,14 +117,7 @@ module.exports = function(app, model){
             app.delete("/api/user/:userId", deleteUser);
 
             function deleteUser(req, res){
-               /* var userId = req.params.userId;
-                for(i=0;i<users.length;i++){
-                    if(users[i]._id===userId){
-                        users.splice(i,1);
-                    }
-                }
 
-                res.send(true);*/
                var userId = req.params.userId;
                model.userModel.deleteUser(userId)
                    .then(
