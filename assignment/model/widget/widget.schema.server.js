@@ -6,7 +6,7 @@ module.exports = function(mongoose){
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Page'
         },
-        type:  {enum: ['heading', 'image', 'youtube', 'html', 'text']},
+        type:  {type: String, enum: ['heading', 'image', 'youtube', 'html', 'text']},
         name: String,
         text: String,
         placeholder: String,
@@ -20,6 +20,7 @@ module.exports = function(mongoose){
         icon: String,
         deletable: Boolean,
         formatted: Boolean,
+        order: Number,
         dateCreated: {type: Date, default: Date.now}
 
 

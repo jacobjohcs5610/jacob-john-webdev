@@ -31,7 +31,7 @@
             <table class="table" >
                 <tbody jga-sortable
                        jga-sortable-callback="model.sortItem(start, end)">
-                <tr ng-switch="widget.widgetType"
+                <tr ng-switch="widget.type"
                      ng-repeat="widget in model.widgets" >
 
                 <td ng-switch="widget.size" ng-switch-when="heading">
@@ -55,7 +55,7 @@
                 <td ng-switch-when="text">
                         <div ng-if="widget.formatted" text-angular ta-toolbar="..."></div>
                         <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
-                               placeholder="{{widget.textInput.placeholder}}" class="form-control"/>
+                               placeholder="{{widget.placeholder}}" class="form-control"/>
                         <textarea ng-if="!widget.formatted && (widget.rows > 1)"
                                   rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
                                   class="form-control">{{widget.text}}</textarea>

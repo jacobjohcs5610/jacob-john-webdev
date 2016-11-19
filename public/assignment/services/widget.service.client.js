@@ -83,8 +83,8 @@
             return $http.delete("/api/upload");
         }
 
-        function sortWidgets(widgets,pageId,index1,index2){
-            return $http.put("/page/"+pageId+"/widget?initial="+index1+"&final="+index2,widgets)
+        function sortWidgets(widget,pageId,index1,index2){
+            return $http.put("/page/"+pageId+"/widget?initial="+index1+"&final="+index2,widget)
         }
 
 

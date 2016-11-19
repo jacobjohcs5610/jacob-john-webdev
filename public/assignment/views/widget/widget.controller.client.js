@@ -30,14 +30,14 @@
                          var text = div.textContent || div.innerText || "";
                          vm.widgets[w].text = text;
                          }*/
-                        if (vm.widgets[w].widgetType == "HEADER" || vm.widgets[w].widgetType == "HEADING") {
-                            vm.widgets[w].widgetType = "heading";
-                        } else if (vm.widgets[w].widgetType == "IMAGE") {
-                            vm.widgets[w].widgetType = "image";
-                        } else if (vm.widgets[w].widgetType == "YOUTUBE") {
-                            vm.widgets[w].widgetType = "youtube";
-                        } else if(vm.widgets[w].widgetType == "HTML") {
-                            vm.widgets[w].widgetType = "html";
+                        if (vm.widgets[w].type == "HEADER" || vm.widgets[w].type == "HEADING") {
+                            vm.widgets[w].type = "heading";
+                        } else if (vm.widgets[w].type == "IMAGE") {
+                            vm.widgets[w].type = "image";
+                        } else if (vm.widgets[w].type == "YOUTUBE") {
+                            vm.widgets[w].type = "youtube";
+                        } else if(vm.widgets[w].type == "HTML") {
+                            vm.widgets[w].type = "html";
                         } else {}
                     }
                 });
@@ -48,17 +48,21 @@
         function sortItem(start, end) {
 
 
-            var moved = vm.widgets.splice(start, 1)[0];
+            var widget = vm.widgets[start];
+           // console.log(widget);
+
+            //vm.widgets.splice(end, 0,moved );
 
 
-            vm.widgets.splice(end, 0,moved );
 
+            WidgetService.sortWidgets(widget,vm.pageId,start,end)
+                .success(function(widget){
+                    WidgetService.findWidgetsByPageId(vm.pageId)
+                        .success(function(widgetList){
+                            vm.widgets = widgetList;
+                        });
 
-
-            WidgetService.sortWidgets(vm.widgets,vm.pageId,start,end)
-                .success(function(widgetList){
-                    vm.widgets = widgetList;
-                })
+                });
 
 
         }
@@ -88,7 +92,7 @@
         vm.userId = $routeParams["uid"];
 
         function addWidget(widgetType){
-            var widget = {widgetType: widgetType};
+            var widget = {type: widgetType};
             WidgetService.createWidget(vm.pageId, widget)
                 .success(function(newWidget){
                     vm.widgetId = newWidget._id;

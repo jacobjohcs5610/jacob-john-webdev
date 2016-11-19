@@ -15,14 +15,31 @@ module.exports = function (app,model){
 
     var tempImages = [];
 
+
     var multer = require('multer'); // npm install multer --save
     var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
     app.delete("/api/upload",deleteTemp);
 
     function deleteTemp(req,res){
-        tempImages = [];
-        res.send(true);
+        if(tempImages.length>0){
+            //tempImages[0].url = "";
+            //tempImages[0].name="";
+            //tempImages[0].text = "";
+            model.widgetModel.updateImageUrl(tempImages[0],"")
+                .then(
+                    function(widget){
+                        tempImages=[];
+                        res.json(widget);
+                    },
+                    function(error){
+                        tempImages=[];
+                        res.sendStatus(400).send(error);
+                    }
+                );
+        }
+        //tempImages = [];
+        //res.send(true);
     }
 
 
@@ -48,11 +65,49 @@ module.exports = function (app,model){
         var mimetype      = myFile.mimetype;
 
 
-        var temp = {_id: widgetId, widgetType: "image", pageId: pageId, width: width, url: "\\uploads\\" + filename};
+        /*model.pageModel.findPageById(pageId)
+            .then(
+                function(pages){
+                    if(pages){
+                        var temp = {_id: widgetId, type: "image", _page: pages[0], width: width, url: "\\uploads\\" + filename};
+                        console.log(temp);
+                        tempImages.push(temp);
+                        model.widgetModel.updateWidget(temp)
+                            .then(
+                                function(widget){
+                                    console.log(widget);
+                                    res.redirect('../assignment/index.html#/user/'+userId+'/website/'+webId+'/page/'+pageId+'/widget/'+widgetId);
+                                },
+                                function(error){
+                                    res.sendStatus(400).send(error);
+                                }
+                            );
 
-        tempImages.push(temp);
+                    } else{
 
-        res.redirect('../assignment/index.html#/user/'+userId+'/website/'+webId+'/page/'+pageId+'/widget/'+widgetId);
+                    }
+
+                    res.redirect('../assignment/index.html#/user/'+userId+'/website/'+webId+'/page/'+pageId+'/widget/'+widgetId);
+
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );*/
+
+        model.widgetModel.updateImageUrl(widgetId, "\\uploads\\" + filename)
+            .then(
+                function(widget){
+                    tempImages.push(widgetId);
+                    res.redirect('../assignment/index.html#/user/'+userId+'/website/'+webId+'/page/'+pageId+'/widget/'+widgetId);
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
+
+
+
 
     }
 
@@ -83,24 +138,42 @@ module.exports = function (app,model){
         res.json(widget);*/
         var widget = req.body;
         widget._page = null;
-        console.log(widget.pageId);
+
         model.pageModel.findPageById(widget.pageId)
             .then(
                 function(pages){
                     if(pages){
-                        console.log(pages);
-                        widget._page = page[0];
 
+                        widget._page = pages[0];
+                        var pageId = pages[0]._id;
+
+                        //model.widgetModel.getCount();
+
+                        //console.log(widget.order);
                         model.widgetModel.createWidget(widget)
                             .then(
-                                function(widget){
-                                    console.log(widget);
+                                function (widget) {
+                                    //console.log(widget);
+                                    //model.pageModel.addWidgetToPage(pageId, widget)
+                                    //    .then(
+                                    //        function(widgetAns){
+                                    //            res.json(widget);
+                                    //        },
+                                    //        function(error){
+                                    //            res.sendStatus(400).send(error);
+                                    //        }
+                                    //    );
+                                    //console.log("created "+ widget);
                                     res.json(widget);
+
                                 },
-                                function(error){
+                                function (error) {
+                                    console.log(error);
                                     res.sendStatus(400).send(error);
                                 }
                             );
+
+
 
                     }else{
                         console.log("null pages");
@@ -109,6 +182,7 @@ module.exports = function (app,model){
                     }
                 },
                 function(error){
+                    console.log(error);
                     res.sendStatus(400).send(error);
                 }
             );
@@ -132,10 +206,27 @@ module.exports = function (app,model){
             .then(
                 function(pages){
                     if(pages){
+                       // console.log(pages[0].widgets);
+                        /*var widgetList = [];
+                        for(id in pages[0].widgets){
+                            model.widgetModel.findWidgetById(pages[0].widgets[id])
+                                .then(
+                                    function(widget){
+                                        widgetList.push(widget);
+                                    },
+                                    function(error){
+                                        res.sendStatus(400).send(error);
+                                    }
+                                );
+                        }
+                        //res.send(widgetList);
+                        //res.send(pages[0].widgets);*/
+
                         model.widgetModel.findAllWidgetsForPage(pages[0])
                             .then(
                                 function(widgets){
                                     if(widgets){
+                                       // console.log(widgets);
                                         res.send(widgets);
                                     }else{
                                         res.send([]);
@@ -168,9 +259,11 @@ module.exports = function (app,model){
         }
         res.json(widgetAns);*/
         var widgetId = req.params.widgetId;
+
         model.widgetModel.findWidgetById(widgetId)
             .then(
                 function(widgets){
+
                     res.json(widgets[0]);
                 },
                 function(error){
@@ -195,7 +288,13 @@ module.exports = function (app,model){
             }*/
             var widgetId = req.params.widgetId;
             var widgetUpdate = req.body;
-            model.widgetModel.updateWidget(widgetId, widget)
+            if(tempImages.length==0) {
+                widgetUpdate = req.body;
+            }else{
+                //widgetUpdate = tempImages[0];
+                tempImages = [];
+            }
+            model.widgetModel.updateWidget(widgetId, widgetUpdate)
                 .then(
                     function(widget){
                         res.json(widgetUpdate);
@@ -223,15 +322,19 @@ module.exports = function (app,model){
 
         res.send(true);*/
         var widgetId = req.params.widgetId;
+        console.log(widgetId);
+
         model.widgetModel.deleteWidget(widgetId)
             .then(
                 function(status){
-                    res.send(200);
+                    res.sendStatus(200);
                 },
                 function(error){
                     res.sendStatus(400).send(error);
                 }
             );
+
+
     }
 
     app.put("/page/:pageId/widget",sortWidgets);
@@ -239,8 +342,18 @@ module.exports = function (app,model){
     function sortWidgets(req, res){
         var start = req.query.initial;
         var end = req.query.final;
-        widgets = req.body;
+        var widget = req.body;
 
-        res.json(widgets);
+        model.widgetModel.sortWidgets(widget,start,end)
+            .then(
+                function(widget){
+                    res.send(widget);
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
+
+        //res.json(widgets);
     }
 }

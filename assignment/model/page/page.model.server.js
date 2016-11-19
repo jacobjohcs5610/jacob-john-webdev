@@ -9,7 +9,9 @@ module.exports = function(mongoose){
         findAllPagesForWebsite: findAllPagesForWebsite,
         findPageById: findPageById,
         updatePage: updatePage,
-        deletePage: deletePage
+        deletePage: deletePage,
+        addWidgetToPage: addWidgetToPage,
+        reorderWidgets: reorderWidgets
     };
 
     return api;
@@ -39,5 +41,27 @@ module.exports = function(mongoose){
     function deletePage(pageId){
         return PageModel.remove({_id: pageId});
     }
+
+    function addWidgetToPage(pageId, widget){
+        console.log(widget._id);
+        console.log(pageId);
+        return PageModel.update(
+            {_id: pageId},
+            {$push: {widgets: widget._id}}
+        );
+    }
+
+    function reorderWidgets(pageId, widget, end){
+        var target =PageModel.update(
+            {_id: pageId},
+            {$pull: {widgets: widget._id}}
+        );
+        return PageModel.update(
+            {_id: pageId},
+            {$push: {widgets: {$each:[widget._id], $position: end}}}
+        );
+    }
+
+
 
 };
