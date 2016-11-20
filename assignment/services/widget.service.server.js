@@ -322,7 +322,7 @@ module.exports = function (app,model){
 
         res.send(true);*/
         var widgetId = req.params.widgetId;
-        console.log(widgetId);
+
 
         model.widgetModel.deleteWidget(widgetId)
             .then(
