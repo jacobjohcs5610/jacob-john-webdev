@@ -25,7 +25,7 @@
                 <b class="navbar-brand">Edit Page</b>
 
 
-                <a href="#/user/{{model.userId}}/website/{{model.webId}}/page" ng-click="model.updatePage(model.page)"><scan class="glyphicon glyphicon-ok floatright navbar-brand"></scan></a>
+                <a href ng-click="model.updatePage(model.page)"><scan class="glyphicon glyphicon-ok floatright navbar-brand"></scan></a>
             </div>
 
         </div>
@@ -58,11 +58,16 @@
 
             <div class="row">
                 <div class="col-sm-9">
-
+                    <div ng-show="model.alert" class="row alert alert-danger alert-dismissible">
+                        {{model.alert}}
+                    </div>
 
                     <label for="username">Name</label>
-                    <input id="username" ng-model="model.page.name" type="text" class="form-control" placeholder="Page Name">
+                    <input id="username" ng-class="{'alert-danger': model.alert && !model.page.name}" ng-model="model.page.name" type="text" class="form-control" placeholder="Page Name">
 
+                    <div class="col-xs-12 field-error" ng-show="model.alert && !model.page.name">
+                        name is required
+                    </div>
 
                 </div>
             </div>

@@ -1,5 +1,22 @@
 <div class="container">
 
+    <div ng-show="model.alert" class="row alert alert-danger alert-dismissible">
+        {{model.alert}}
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+
+
+            <label for="username">Name</label>
+            <input id="username" ng-class="{'alert-danger': model.alert && !model.widget.name}" type="text" ng-model="model.widget.name" class="form-control">
+            <div class="col-xs-12 field-error" ng-show="model.alert && !model.widget.name">
+                name is required
+            </div>
+
+        </div>
+    </div>
+
     <div class="row">
 
         <div class="col-xs-12">

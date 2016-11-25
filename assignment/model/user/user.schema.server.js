@@ -8,6 +8,10 @@ module.exports=function(mongoose){
         email: String,
         phone: String,
         websites: [websiteSchema],
+        facebook: {
+            id:    String,
+            token: String
+        },
         dateCreated: {type: Date, default: Date.now}
     });
 

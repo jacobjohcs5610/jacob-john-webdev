@@ -24,7 +24,7 @@
 
 
 
-            <a href="#/user/{{model.userId}}/website" ng-click="model.updateWebsite(model.website)"><scan class="glyphicon glyphicon-ok headfoot floatright"></scan></a>
+            <a href ng-click="model.updateWebsite(model.website)"><scan class="glyphicon glyphicon-ok headfoot floatright"></scan></a>
 
 
             </div>
@@ -59,10 +59,15 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-
+            <div ng-show="model.alert" class="row alert alert-danger alert-dismissible">
+                {{model.alert}}
+            </div>
             <div class="row">
                 <label for="username">Website Name</label>
-                <input id="username" ng-model="model.website.name" type="text" class="form-control" placeholder="Name">
+                <input id="username" ng-class="{'alert-danger': model.alert && !model.website.name}" ng-model="model.website.name" type="text" class="form-control" placeholder="Name">
+                <div class="col-xs-12 field-error" ng-show="model.alert && !model.website.name">
+                    name is required
+                </div>
             </div>
 
             <div class="row">

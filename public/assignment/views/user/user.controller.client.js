@@ -10,15 +10,17 @@
             var vm = this;
             vm.login = login;
 
-            function login(user){
-                UserService.findUserByCredentials(user.username,user.password).success(
-                    function(user){
-                        if(user!=null){
-                            $location.url("/user/"+user._id);
-                        }else{
-                            vm.alert = "Unable to login" ;
-                        }
-                    });
+            function login(userIn){
+
+                if(!vm.user || !vm.user.username || !vm.user.password){
+                    vm.alert = "Username and password are required";
+                }else {
+                    UserService.login(userIn).then(
+                        function (response) {
+                            var user = response.data;
+                            $location.url("/user/" + user._id);
+                        });
+                }
             }
         }
 
@@ -28,42 +30,59 @@
 
             function register(user) {
                 vm.userNew = null;
-                UserService.findUserByUsername(user.username).success(function(userAns){
-                    //console.log(userAns);
-                    vm.userNew = userAns;
-                    //console.log(vm.userNew);
+                if (!vm.user || !vm.user.username || !vm.user.password || !vm.user.verifypassword) {
+                    vm.alert = "one or more missing fields"
+                } else {
+                    UserService.findUserByUsername(user.username).success(function (userAns) {
+                        //console.log(userAns);
+                        vm.userNew = userAns;
+                        //console.log(vm.userNew);
 
-                    if ( vm.userNew === null) {
-                        if (user.password === user.verifypassword) {
-                            user = {
-                                username: user.username,
-                                password: user.password,
-                                firstName: "",
-                                lastName: ""
-                            };
-                            UserService.createUser(user).success(function(newUser) {
+                        if (vm.userNew === null) {
+                            if (user.password === user.verifypassword) {
+                                user = {
+                                    username: user.username,
+                                    password: user.password,
+                                    firstName: "",
+                                    lastName: ""
+                                };
+                                UserService.register(user).success(function (newUser) {
 
                                     $location.url("/user/" + newUser._id);
 
 
-                            });
-                        } else{
-                            vm.alert = "Passwords do not match"
+                                });
+                            } else {
+                                vm.alert = "Passwords do not match"
+                            }
+                        } else {
+                            vm.alert = "User already exists"
                         }
-                    } else {
-                        vm.alert = "User already exists"
-                    }
 
-                });
+                    });
+                }
             }
         }
         function ProfileController($routeParams, $location, UserService) {
 
             var vm = this;
             vm.updateProfile = updateProfile;
+            vm.logout = logout;
 
             vm.userId = $routeParams["uid"];
-            function init() {
+
+
+            function logout() {
+                UserService
+                    .logout()
+                    .then(
+                        function (response) {
+                            //$rootScope.currentUser = null;
+                            $location.url("/");
+                        })
+            }
+
+             function init() {
 
                 var promise = UserService.findUserById(vm.userId);
                 promise.success(function(user){vm.user= user;});

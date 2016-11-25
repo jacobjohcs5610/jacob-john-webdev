@@ -1,6 +1,8 @@
 module.exports = function(mongoose){
 
     //var mongoose = require('mongoose');
+    var bcrypt = require("bcrypt-nodejs");
+
 
     var UserSchema = require('./user.schema.server.js')(mongoose);
 
@@ -13,12 +15,16 @@ module.exports = function(mongoose){
         findUserByUsername: findUserByUsername,
         findUserById: findUserById,
         updateUser: updateUser,
-        deleteUser: deleteUser
+        deleteUser: deleteUser,
+        findUserByFacebookId: findUserByFacebookId
+
     };
 
     return api;
 
-
+    function findUserByFacebookId(facebookId) {
+        return UserModel.findOne({'facebook.id': facebookId});
+    }
 
     function createUser(user){
         return UserModel.create(user);
@@ -26,7 +32,18 @@ module.exports = function(mongoose){
     }
 
     function findUserByCredentials(username,password){
-        return UserModel.find({username: username, password: password});
+
+        return UserModel.find({username: username})
+            .then(
+                function(users){
+                    var user = users[0];
+                    if(user && bcrypt.compareSync(password, user.password)) {
+                        return UserModel.find({username: username});
+                    } else {
+                        return UserModel.find({username: null});
+                    }
+                }
+            );
     }
 
     function findUserByUsername(username){

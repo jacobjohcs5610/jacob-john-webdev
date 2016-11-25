@@ -127,7 +127,12 @@
         }
 
         function updateWidget(){
-            WidgetService.updateWidget(vm.widgetId, vm.widget);
+            if(!vm.widget || !vm.widget.name){
+                vm.alert = "widget name is required";
+            }else {
+                $location.url("/user/"+vm.userId+"/website/"+vm.webId+"/page/"+vm.pageId+"/widget");
+                WidgetService.updateWidget(vm.widgetId, vm.widget);
+            }
         }
 
         function deleteTemp(){

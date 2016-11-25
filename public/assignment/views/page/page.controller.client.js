@@ -18,7 +18,7 @@
         }
         init();
     }
-    function NewPageController($routeParams, PageService) {
+    function NewPageController($routeParams, PageService, $location) {
         var vm = this;
         vm.addPage = addPage;
 
@@ -36,13 +36,18 @@
         init();
 
         function addPage(page){
-            PageService.createPage(vm.webId,page)
+            if(!vm.page || !vm.page.name){
+                vm.alert = "page name is required"
+            } else {
+                PageService.createPage(vm.webId, page);
+                $location.url("/user/"+vm.userId+"/website/"+vm.webId+"/page");
+            }
 
         }
 
 
     }
-    function EditPageController($routeParams,PageService) {
+    function EditPageController($routeParams,PageService,$location) {
         var vm = this;
         vm.deletePage = deletePage;
         vm.updatePage = updatePage;
@@ -72,7 +77,12 @@
         }
 
         function updatePage(page){
-            PageService.updatePage(vm.pageId,page);
+            if(!vm.page || !vm.page.name){
+                vm.alert = "page name is required"
+            } else {
+                PageService.updatePage(vm.pageId, page);
+                $location.url("/user/"+vm.userId+"/website/"+vm.webId+"/page");
+            }
         }
     }
 

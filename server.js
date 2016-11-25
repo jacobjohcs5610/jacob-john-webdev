@@ -5,6 +5,14 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+var cookieParser = require('cookie-parser');
+var session      = require('express-session');
+
+app.use(cookieParser());
+app.use(session({ secret: process.env.USERNAME }));
+console.log(process.env);
+
+
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 

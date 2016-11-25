@@ -2,6 +2,11 @@
 
 <div class="container">
 
+    <div ng-show="model.alert" class="row alert alert-danger alert-dismissible">
+        {{model.alert}}
+    </div>
+
+
     <h1>Register</h1>
 
     <form action="#/user/:uid">
@@ -9,18 +14,11 @@
         <div class="col-xs-12">
 
 
-                <input type="text" ng-model="model.user.username" class="form-control" placeholder="username">
+                <input type="text" ng-class="{'alert-danger': model.alert && !model.user.username}" ng-model="model.user.username" class="form-control" placeholder="username" required>
 
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-12">
-
-
-                <input type="password" ng-model="model.user.password" class="form-control" placeholder="password">
-
+            <div class="col-xs-12 field-error" ng-show="model.alert && !model.user.username">
+                username is required
+            </div>
 
         </div>
     </div>
@@ -29,8 +27,30 @@
         <div class="col-xs-12">
 
 
-                <input type="password" ng-model="model.user.verifypassword" class="form-control" placeholder="verify password">
+                <input type="password" ng-class="{'alert-danger': model.alert && !model.user.password}" ng-model="model.user.password" class="form-control" placeholder="password" required>
 
+            <div class="col-xs-12 field-error" ng-show="model.alert && !model.user.password">
+                password is required
+            </div>
+            <div class="col-xs-12 field-error" ng-show="model.alert && !(model.user.verifypassword===model.user.password)">
+                passwords do not match
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+
+
+                <input type="password" ng-class="{'alert-danger': model.alert && !model.user.verifypassword}" ng-model="model.user.verifypassword" class="form-control" placeholder="verify password" required>
+
+            <div class="col-xs-12 field-error" ng-show="model.alert && !model.user.verifypassword">
+                verify password is required
+            </div>
+            <div class="col-xs-12 field-error" ng-show="model.alert && !(model.user.verifypassword===model.user.password)">
+                passwords do not match
+            </div>
 
         </div>
     </div>
