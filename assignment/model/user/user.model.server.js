@@ -42,6 +42,9 @@ module.exports = function(mongoose){
                     } else {
                         return UserModel.find({username: null});
                     }
+                },
+                function(error){
+                    return error;
                 }
             );
     }
