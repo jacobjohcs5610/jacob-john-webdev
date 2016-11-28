@@ -24,7 +24,7 @@ module.exports = function(mongoose){
         //widget.order = WidgetModel.count()+1;
         //console.log("widgetorder "+ widget.order)
         console.log("model createWidget 1");
-        return WidgetModel.count()
+        return WidgetModel.count({_page: widget._page})
             .then(
                 function(count){
                     console.log(count);
@@ -79,7 +79,7 @@ module.exports = function(mongoose){
                function(widgets){
                    var index = widgets[0].order;
                    //console.log(index);
-                   return WidgetModel.update({order: {$gt: index}},{$inc: {order: -1}}, {multi: true})
+                   return WidgetModel.update({$and:[{order: {$gt: index}},{_page: widgets[0]._page}]},{$inc: {order: -1}}, {multi: true})
                        .then(
                            function(status){
                                return WidgetModel.remove({_id: widgetId});
@@ -117,10 +117,10 @@ module.exports = function(mongoose){
 
     function sortWidgets(widget, start, end){
         //console.log(widget);
-        return WidgetModel.update({order: {$gt: widget.order}},{$inc: {order: -1}},{multi:true})
+        return WidgetModel.update({$and:[{_page: widget.page},{order: {$gt: widget.order}}]},{$inc: {order: -1}},{multi:true})
             .then(
                 function(widgets){
-                    return WidgetModel.update({order: {$gt: end-1}},{$inc: {order: 1}},{multi:true})
+                    return WidgetModel.update({$and:[{_page: widget.page},{order: {$gt: end-1}}]},{$inc: {order: 1}},{multi:true})
                         .then(
                             function(widgets){
                                 return WidgetModel.update({_id: widget._id},{order: end});
