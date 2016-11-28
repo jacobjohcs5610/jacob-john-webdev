@@ -60,19 +60,6 @@ module.exports = function(mongoose){
 
     function deleteWidget(widgetId){
 
-       /* WidgetModel.count()
-            .then(
-                function(count){
-                    //widgetId._id = null
-                    //widgetId.order = count+1;
-                    console.log(count);
-                    return WidgetModel.create({type: "heading", order: count+1});
-                },
-                function(error){
-                    return error;
-                }
-            );*/
-       //var index = 0;
 
        return WidgetModel.find({_id: widgetId})
            .then(
@@ -93,15 +80,7 @@ module.exports = function(mongoose){
                    return error;
                }
            );
-          /* .then(
-               function(widgets){
-                   index = widgets[0].order;
-                   return WidgetModel.updateMany({order: {$gt: index}},{$inc: {order: -1}});
-               },
-               function(error){
 
-               }
-           );*/
 
 
 
@@ -117,12 +96,13 @@ module.exports = function(mongoose){
 
     function sortWidgets(widget, start, end){
         //console.log(widget);
-        return WidgetModel.update({$and:[{_page: widget.page},{order: {$gt: widget.order}}]},{$inc: {order: -1}},{multi:true})
+    /*    return WidgetModel.update({$and:[{_page: widget._page},{order: {$gt: widget.order}}]},{$inc: {order: -1}},{multi:true})
             .then(
-                function(widgets){
-                    return WidgetModel.update({$and:[{_page: widget.page},{order: {$gt: end-1}}]},{$inc: {order: 1}},{multi:true})
+                function(widgets){ */
+                    return WidgetModel.update({$and:[{_page: widget._page},{order: {$gt: end-1}},{order: {$lt: widget.order}}]},{$inc: {order: 1}},{multi:true})
                         .then(
                             function(widgets){
+
                                 return WidgetModel.update({_id: widget._id},{order: end});
 
                             },
@@ -130,11 +110,11 @@ module.exports = function(mongoose){
                                 return error;
                             }
                         );
-                },
+              /*  },
                 function(error){
                     return error;
                 }
-            );
+            );*/
     }
 
 };
