@@ -137,16 +137,17 @@ module.exports = function (app,model){
         widgets.push(widget);
         res.json(widget);*/
         var widget = req.body;
+        console.log("service, widget"+widget);
         widget._page = null;
 
         model.pageModel.findPageById(widget.pageId)
             .then(
                 function(pages){
+                    console.log("service, pages"+pages);
                     if(pages){
-
+                        console.log("service, page"+pages[0]);
                         widget._page = pages[0];
                         var pageId = pages[0]._id;
-
                         //model.widgetModel.getCount();
 
                         //console.log(widget.order);
@@ -164,6 +165,7 @@ module.exports = function (app,model){
                                     //        }
                                     //    );
                                     //console.log("created "+ widget);
+                                    console.log("service, widget"+widget);
                                     res.json(widget);
 
                                 },

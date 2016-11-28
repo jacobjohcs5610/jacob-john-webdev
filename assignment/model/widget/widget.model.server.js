@@ -23,16 +23,21 @@ module.exports = function(mongoose){
     function createWidget(widget){
         //widget.order = WidgetModel.count()+1;
         //console.log("widgetorder "+ widget.order)
+        console.log("model createWidget 1");
         return WidgetModel.count()
             .then(
                 function(count){
+                    console.log(count);
+                    console.log("model createWidget 2");
                     widget.order = count;
+                    console.log(widget);
                     return WidgetModel.create(widget);
                 },
                 function(error){
+                    console.log(error);
                     return error;
                 }
-            )
+            );
         //return WidgetModel.create(widget);
     }
 
