@@ -1,0 +1,59 @@
+
+
+<div ng-include="'/views/header2.view.client.html'"></div>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-xs-11">
+            <img ng-if="model.gifGif" ng-src="{{model.checkSafeImageUrl(model.gifGif.url)}}" width="{{model.gifGif.width}}" height="{{model.gifGif.height}}">
+        </div>
+        <div class="col-xs-1">
+            <div ng-if="model.gifGif && (model.user.admin || (model.gifGif._user===model.user._id))" class="floatright"><a href ng-click="model.deleteGif()"><scan class="glyphicon glyphicon-remove "></scan></a></div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+
+            <a href ng-click="model.addComment()">
+                <button type="submit" class="btn btn-success form-control">Add Comment</button>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="row"  ng-switch="comment.type"
+        ng-repeat="comment in model.comments"  >
+        <div class="col-xs-11">
+            <div>
+                {{comment.dateCreated}}
+            </div>
+            <div ng-bind-html="model.checkSafeHtml(comment.text)">
+            </div>
+
+        </div>
+        <div class="col-xs-1">
+            <div  class=" floatright" ng-if="model.user.admin || (comment._user===model.user._id)">
+                <a href ng-click="model.deleteComment(comment._id)"><scan class="glyphicon glyphicon-remove "></scan></a>
+            </div>
+            <div  class=" floatright" ng-if="model.user.admin || (comment._user===model.user._id)">
+                <a href="#/user/{{model.userId}}/topic/{{model.topicId}}/gif/{{comment._gif}}/comment/{{comment._id}}"> <scan class="glyphicon glyphicon-cog"></scan></a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+

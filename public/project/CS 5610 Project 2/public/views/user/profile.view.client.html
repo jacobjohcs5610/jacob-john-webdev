@@ -1,0 +1,105 @@
+
+
+
+
+<div ng-include="'/views/header2.view.client.html'"></div>
+
+
+
+<div class="container"  >
+
+
+        <div class="row">
+            <div class="col-xs-12">
+
+
+                <label for="username">Username</label>
+                <input id="username" ng-model="model.user.username" type="text" class="form-control" placeholder="username">
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+
+
+                <label for="email">Email</label>
+                <input id="email" ng-model="model.user.email" type="email" class="form-control" placeholder="email">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+
+
+                <label for="firstname">First Name</label>
+                <input id="firstname" ng-model="model.user.firstName" type="text" class="form-control" placeholder="First Name">
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+
+
+                <label for="lastname">Last Name</label>
+                <input id="lastname" ng-model="model.user.lastName" type="text" class="form-control" placeholder="Last Name">
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+
+                <a href="#/user/{{model.userId}}/topic"><button class="btn btn-primary btn-block form-control" >Topics</button></a>
+
+
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-12">
+
+                <a href ng-click="model.updateProfile(model.user)"><button class="btn btn-primary btn-block form-control" >Update Profile</button></a>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-12">
+
+
+                <a href="#/login" ng-click="model.logout()"><button class="btn btn-danger form-control">Logout</button></a>
+
+            </div>
+        </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+<!--nav class="navbar navbar-default navbar-fixed-bottom ">
+    <div class="container-fluid bg-primary">
+        <div class="navbar-header navbar-brand">
+
+
+                <scan class="glyphicon glyphicon-user colorwhite"></scan>
+
+
+        </div>
+    </div>
+</nav-->
+

@@ -1,0 +1,68 @@
+
+
+
+
+<div ng-include="'/views/header2.view.client.html'"></div>
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-xs-12">
+
+
+
+
+                <table class="table color-primary">
+                    <tr ng-repeat="topic in model.topics">
+                        <td><a href="#/user/{{model.userId}}/topic/{{topic._id}}/gif">{{topic.name}}</a></td>
+                        <td ng-if="model.user.admin || topic._user===model.user._id"><a href="#/user/{{model.userId}}/topic/{{topic._id}}"  class="floatright"><scan class="glyphicon glyphicon-cog"></scan></a></td>
+
+                    </tr>
+                </table>
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+
+
+            <a href="#/user/{{model.userId}}/topic/new" ><button type="submit" class="btn btn-success form-control">Add Topic</button></a>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<!--nav class="navbar navbar-default navbar-fixed-bottom ">
+    <div class="container-fluid bg-primary">
+        <div class="navbar-header navbar-brand floatright">
+
+
+                <a href="#/user/{{model.userId}}"><scan class="glyphicon glyphicon-user headfoot floatright"></scan></a>
+
+
+        </div>
+    </div>
+</nav-->
+
+

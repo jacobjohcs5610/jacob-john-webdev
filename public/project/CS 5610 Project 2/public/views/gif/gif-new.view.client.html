@@ -1,0 +1,111 @@
+
+
+<nav class="navbar navbar-default navbar-fixed-top headfoot " >
+    <div class="container-fluid row">
+        <div class="navbar-header">
+
+
+            <div class="col-sm-1 ">
+
+                <a href="#/user/{{model.userId}}/topic/{{model.topicId}}/gif" class="floatleft"><scan class="glyphicon glyphicon-chevron-left navbar-brand"></scan></a>
+            </div>
+
+            <div class="col-sm-1 hidden-xs ">
+                <b class="  navbar-brand"  >Gifs</b>
+            </div>
+
+            <div class="col-sm-1 hidden-xs">
+                <a href="#/user/{{model.userId}}/topic/{{model.topicId}}/gif/new"   ><scan class="glyphicon glyphicon-plus navbar-brand" >
+
+                </scan></a>
+            </div>
+
+
+            <div class="col-sm-9">
+                <b class="navbar-brand">New Gif</b>
+
+
+                <a href ng-click="model.addGif(model.gif)"><scan class="glyphicon glyphicon-ok floatright navbar-brand"></scan></a>
+            </div>
+
+        </div>
+
+
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-3 sidebar">
+
+
+                <table class="table color-primary">
+                    <tr ng-repeat="eachgif in model.gifs">
+                        <td><a href="#/user/{{model.userId}}/topic/{{model.topicId}}/gif/{{eachgif._id}}/comment">{{eachgif.name}}</a></td>
+                        <td><a href="#/user/{{model.userId}}/topic/{{model.topicId}}/gif/{{eachgif._id}}"><scan class="glyphicon glyphicon-cog floatright"></scan></a></td>
+
+                    </tr>
+                </table>
+
+
+
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 main">
+
+
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div ng-show="model.alert" class="row alert alert-danger alert-dismissible">
+                            {{model.alert}}
+                        </div>
+
+                        <label for="username">Name</label>
+                        <input id="username" ng-class="{'alert-danger': model.alert && !model.gif.name}" ng-model="model.gif.name" type="text" class="form-control" placeholder="Gif Name">
+
+                        <div class="col-xs-12 field-error" ng-show="model.alert && !model.gif.name">
+                            name is required
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-9">
+
+
+                        <label for="email">Title</label>
+                        <input id="email" ng-model="model.gif.title" type="text" class="form-control" placeholder="Gif Title">
+
+
+                    </div>
+                </div>
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom ">
+    <div class="container-fluid">
+        <div class="navbar-header navbar-brand">
+
+
+            <a href="#/user/{{model.userId}}"><scan class="glyphicon glyphicon-user color-primary floatright"></scan></a>
+
+
+        </div>
+    </div>
+</nav>
+

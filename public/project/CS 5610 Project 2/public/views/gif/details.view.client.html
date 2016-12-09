@@ -1,0 +1,35 @@
+
+<div ng-include="'/views/header2.view.client.html'"></div>
+
+
+
+<div class="container-fluid ">
+
+    <div class="centered">
+
+
+
+        <h3>Click on your selection</h3>
+
+        <div ng-repeat="gif in model.gifData.images">
+            <div ng-if="$index < model.imagesKeys.length-3">
+                <hr>
+                <h4>{{model.imagesKeys[$index].split("_").join(" ")}}</h4>
+                <br>
+                <a href ng-click="model.addGif(gif)">
+                    <img ng-src="{{model.checkSafeImageUrl(gif.url)}}" width="gif.width" height="gif.height"></a>
+                <br>
+                <br>
+                <br>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
