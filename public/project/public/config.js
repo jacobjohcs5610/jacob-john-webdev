@@ -97,7 +97,7 @@
                         var userId = $route.current.params.uid;
                         var commentId = $route.current.params.wgid;
                         var topicId = $route.current.params.tid;
-                        if(commentId) {
+                        if(commentId && $location.path().split("/").length===9) {
                             CommentService.findCommentById(commentId)
                                 .success(
                                     function (comment) {
@@ -108,7 +108,7 @@
                                         }
                                     }
                                 );
-                        } else if(topicId){
+                        } else if(topicId && $location.path().split("/").length===5){
                             TopicService.findTopicById(topicId)
                                 .success(
                                     function(topic){

@@ -134,13 +134,29 @@ module.exports = function(app,model){
     function deleteTopic(req,res){
 
         var topicId = req.params.topicId;
-        model.gifModel.deleteAllGifsForTopic(topicId)
+        model.gifModel.findAllGifsForTopic(topicId)
             .then(
                 function(gifs){
-                    model.topicModel.deleteTopic(topicId)
+                    model.commentModel.deleteAllCommentsForGifs(gifs)
                         .then(
                             function(status){
-                                res.json(200);
+                                model.gifModel.deleteAllGifsForTopic(topicId)
+                                    .then(
+                                        function(gifs){
+                                            model.topicModel.deleteTopic(topicId)
+                                                .then(
+                                                    function(status){
+                                                        res.json(200);
+                                                    },
+                                                    function(error){
+                                                        res.sendStatus(400).send(error);
+                                                    }
+                                                )
+                                        },
+                                        function(error){
+                                            res.sendStatus(400).send(error);
+                                        }
+                                    );
                             },
                             function(error){
                                 res.sendStatus(400).send(error);
@@ -151,6 +167,7 @@ module.exports = function(app,model){
                     res.sendStatus(400).send(error);
                 }
             );
+
 
 
 

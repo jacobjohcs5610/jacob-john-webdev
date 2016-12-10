@@ -13,7 +13,8 @@ module.exports = function(mongoose){
         updateImageUrl: updateImageUrl,
         sortComments: sortComments,
         deleteAllCommentsForGif: deleteAllCommentsForGif,
-        findCommentsWithUsernameByGifId: findCommentsWithUsernameByGifId
+        findCommentsWithUsernameByGifId: findCommentsWithUsernameByGifId,
+        deleteAllCommentsForGifs: deleteAllCommentsForGifs
     }
 
     return api;
@@ -53,6 +54,10 @@ module.exports = function(mongoose){
                 comment
 
         );
+    }
+
+    function deleteAllCommentsForGifs(gifs){
+        return CommentModel.remove({_gif: {$in: gifs}});
     }
 
     function deleteAllCommentsForGif(gifId){
