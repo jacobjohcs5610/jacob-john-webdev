@@ -4,10 +4,10 @@ module.exports = function(mongoose){
 
     var bcrypt = require("bcrypt-nodejs");
 
-    var UserSchema = require('./user.schema.server.js')(mongoose);
+    var ProjectUserSchema = require('./user.schema.server.js')(mongoose);
 
 
-    var UserModel = mongoose.model("UserModel", UserSchema);
+    var ProjectUserModel = mongoose.model("ProjectUserModel", ProjectUserSchema);
 
     var api = {
         createUser: createUser,
@@ -24,19 +24,19 @@ module.exports = function(mongoose){
 
     function createUser(user){
         console.log("in model");
-        return UserModel.create(user);
+        return ProjectUserModel.create(user);
 
     }
     function findUserByCredentials(username,password){
 
-        return UserModel.find({username: username})
+        return ProjectUserModel.find({username: username})
             .then(
                 function(users){
                     var user = users[0];
                     if(user && bcrypt.compareSync(password, user.password)) {
-                        return UserModel.find({username: username});
+                        return ProjectUserModel.find({username: username});
                     } else {
-                        return UserModel.find({username: null});
+                        return ProjectUserModel.find({username: null});
                     }
                 },
                 function(error){
@@ -45,19 +45,19 @@ module.exports = function(mongoose){
             );
     }
     /*function findUserByCredentials(username,password){
-        return UserModel.find({username: username, password: password});
+        return ProjectUserModel.find({username: username, password: password});
     }*/
 
     function findUserByUsername(username){
-        return UserModel.find({username: username});
+        return ProjectUserModel.find({username: username});
     }
 
     function findUserById(userId){
-        return UserModel.find({_id: userId});
+        return ProjectUserModel.find({_id: userId});
     }
 
     function updateUser(userId, user){
-        return UserModel.update(
+        return ProjectUserModel.update(
             {_id: userId},
             {
                 firstName: user.firstName,
@@ -68,7 +68,7 @@ module.exports = function(mongoose){
     }
 
     function deleteUser(userId){
-        return UserModel.remove(
+        return ProjectUserModel.remove(
             {_id: userId}
         );
     }

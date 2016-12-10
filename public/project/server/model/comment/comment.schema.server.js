@@ -8,7 +8,7 @@ module.exports = function(mongoose){
         },
         _user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'UserModel'
+            ref: 'ProjectUserModel'
         },
         name: String,
         text: String,

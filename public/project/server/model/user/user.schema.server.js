@@ -1,6 +1,6 @@
 module.exports=function(mongoose){
     var topicSchema = require("../topic/topic.schema.server.js")(mongoose);
-    var UserSchema = mongoose.Schema({
+    var ProjectUserSchema = mongoose.Schema({
         username: String,
         password: String,
         firstName: String,
@@ -12,5 +12,5 @@ module.exports=function(mongoose){
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "projectusers"});
 
-    return UserSchema;
+    return ProjectUserSchema;
 };

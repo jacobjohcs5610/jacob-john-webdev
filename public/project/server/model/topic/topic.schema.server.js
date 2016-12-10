@@ -5,7 +5,7 @@ module.exports=function(mongoose){
     var TopicSchema = mongoose.Schema({
         _user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'UserModel'
+            ref: 'ProjectUserModel'
         },
         name: String,
         description: String,
