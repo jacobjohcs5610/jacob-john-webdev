@@ -16,7 +16,7 @@ module.exports = function(app, model){
     passport.deserializeUser(deserializeUser);
 
     function deserializeUser(user, done) {
-        model.userModel
+        model.projectuserModel
             .findUserById(user._id)
             .then(
                 function(user){
@@ -31,7 +31,7 @@ module.exports = function(app, model){
     passport.use(new LocalStrategy(localStrategy));
     function localStrategy(username, password, done) {
 
-        model.userModel
+        model.projectuserModel
             .findUserByCredentials(username, password)
             .then(
                 function(users) {
@@ -80,7 +80,7 @@ module.exports = function(app, model){
         var user = req.body;
         user.password = bcrypt.hashSync(user.password);
 
-        model.userModel
+        model.projectuserModel
             .createUser(user)
             .then(
                 function(user){
@@ -103,7 +103,7 @@ module.exports = function(app, model){
             function createUser (req, res) {
                 var user = req.body;
                 console.log("in service server");
-                model.userModel.createUser(req.body)
+                model.projectuserModel.createUser(req.body)
                     .then(
                         function(newUser){
                             res.send(newUser);
@@ -132,7 +132,7 @@ module.exports = function(app, model){
 
                 var username = req.query.username;
                 var password = req.query.password;
-                model.userModel.findUserByCredentials(username,password)
+                model.projectuserModel.findUserByCredentials(username,password)
                     .then(
                         function(users){
                             var ans = users[0];
@@ -155,7 +155,7 @@ module.exports = function(app, model){
 
 
                 var username = req.query.username;
-                model.userModel.findUserByUsername(username)
+                model.projectuserModel.findUserByUsername(username)
                     .then(
                         function(users){
                             var ans = users[0];
@@ -177,7 +177,7 @@ module.exports = function(app, model){
             function findUserById(req, res){
 
                 var userId = req.params.userId;
-                model.userModel.findUserById(userId)
+                model.projectuserModel.findUserById(userId)
                     .then(
                         function(users){
                             if(users[0]) {
@@ -198,7 +198,7 @@ module.exports = function(app, model){
 
                 var userId = req.params.userId;
                 var userUpdate = req.body;
-                model.userModel.updateUser(userId, userUpdate)
+                model.projectuserModel.updateUser(userId, userUpdate)
                     .then(
                         function(user){
                             res.json(userUpdate);
@@ -214,7 +214,7 @@ module.exports = function(app, model){
             function deleteUser(req, res){
 
                var userId = req.params.userId;
-               model.userModel.deleteUser(userId)
+               model.projectuserModel.deleteUser(userId)
                    .then(
                        function(status){
                            res.send(200);

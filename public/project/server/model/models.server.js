@@ -6,14 +6,14 @@ module.exports = function(mongoose) {
 
  //   mongoose.createConnection(connectionString);
 
-    var userModel = require("./user/user.model.server.js")(mongoose);
+    var projectuserModel = require("./user/user.model.server.js")(mongoose);
     var topicModel = require("./topic/topic.model.server.js")(mongoose);
     var gifModel = require("./gif/gif.model.server.js")(mongoose);
     var commentModel = require("./comment/comment.model.server.js")(mongoose);
    // require('./user/user.model.server')(mongoose);
 
     var model = {
-        userModel: userModel ,
+        projectuserModel: projectuserModel ,
         topicModel: topicModel,
         gifModel: gifModel,
         commentModel: commentModel

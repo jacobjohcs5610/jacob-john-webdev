@@ -25,7 +25,7 @@ module.exports = function(app,model){
         var topic = req.body;
 
         topic._user = null;
-        model.userModel.findUserById(topic.developerId)
+        model.projectuserModel.findUserById(topic.developerId)
             .then(
                 function(users){
                     if(users){
@@ -60,7 +60,7 @@ module.exports = function(app,model){
 
         var userId = req.params.userId;
         var user = null;
-        model.userModel.findUserById(userId)
+        model.projectuserModel.findUserById(userId)
             .then(
                 function(users){
                     if(users){
