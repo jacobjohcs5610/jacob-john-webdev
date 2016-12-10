@@ -1,0 +1,59 @@
+
+
+
+
+<div ng-include="'/views/header2.view.client.html'"></div>
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-xs-12">
+
+
+                    <h3 class="centered">Click on a gif to comment on it</h3>
+
+
+                    <div ng-repeat="gifGif in model.gifs">
+                        <div><a href="#/user/{{model.userId}}/topic/{{model.topicId}}/gif/{{gifGif._id}}/comment"><img ng-src="{{model.checkSafeImageUrl(gifGif.url)}}" height="{{gifGif.height}}" width="{{gifGif.width}}"></a></div>
+                        <!--div><a href ng-click="model.deleteGif($index)" ng-if="model.user.admin || gifGif._user===model.user._id"><scan class="glyphicon glyphicon-remove "></scan></a></div>
+
+                        <div>Comment</div-->
+                        <br>
+                    </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+
+
+            <a href="#/user/{{model.userId}}/topic/{{model.topicId}}/gif/search"><button type="submit" class="btn btn-success form-control">Add Gif</button></a>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+

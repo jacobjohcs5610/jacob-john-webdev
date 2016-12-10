@@ -10,7 +10,8 @@ var session      = require('express-session');
 
 app.use(cookieParser());
 app.use(session({ secret: process.env.USERNAME }));
-console.log(process.env);
+
+//console.log(process.env);
 
 
 // configure a public directory to host static content
@@ -22,38 +23,12 @@ var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
 var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 app.listen(port, ipaddress);
 
-/*
-//temp?
 var connectionString = 'mongodb://127.0.0.1:27017/test';
 
-var mongoose = require("mongoose");
 
-mongoose.connect(connectionString);
+require("./assignment/app.js")(app,connectionString);
+require("./public/project/server/app.js")(app,connectionString);
 
-var db_connection = mongoose.connection;
-
-//test if the connected successfully
-db_connection.on('connected', function(){
-    console.log("connect to db successfully!");
-});
-
-db_connection.on('error', function(){
-    console.log("connection error!");
-});
-
-db_connection.on('disconnected', function(){
-    console.log("db disconnected!");
-});
-
-
-require('./user/user.schema.server')(mongoose);
-require('./user/user.model.server')(mongoose);
-*/
-
-
-require("./assignment/app.js")(app/*,mongoose*/);
-
-//require("./assignment/model/models.server.js")(app);
 
 
 

@@ -1,7 +1,7 @@
 module.exports = function(app,connectionString) {
     /*var UserModel = require("./model/user/user.model.server.js")(mongoose);*/
 
-
+    //var connectionString = 'mongodb://127.0.0.1:27017/project';
 
     var mongoose = require("mongoose");
     mongoose.Promise = global.Promise;
@@ -10,7 +10,7 @@ module.exports = function(app,connectionString) {
     var model = require("./model/models.server.js")(mongoose);
     require("./services/user.service.server.js")(app,model);
 
-    require("./services/website.service.server.js")(app,model);
-    require("./services/page.service.server.js")(app,model);
-    require("./services/widget.service.server.js")(app,model);
+    require("./services/topic.service.server.js")(app,model);
+    require("./services/gif.service.server.js")(app,model);
+    require("./services/comment.service.server.js")(app,model);
 };
