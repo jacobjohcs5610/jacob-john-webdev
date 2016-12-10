@@ -20,7 +20,17 @@
                     ProjectUserService.login(userIn).then(
                         function (response) {
                             var user = response.data;
-                            $location.url("/user/" + user._id);
+                            ProjectUserService.checkadmin().
+                                success(
+                                    function(users){
+                                        if(users[0]){
+                                            $location.url("/user/" + user._id);
+                                        } else{
+                                            $location.url("/login");
+                                        }
+                                    }
+                            )
+
                         });
                 }
             }
@@ -52,8 +62,13 @@
                                     admin: false
                                 };
                                 ProjectUserService.register(user).success(function (newUser) {
+                                    ProjectUserService.checkadmin()
+                                        .success(
+                                            function(users){
+                                                $location.url("/user/" + newUser._id);
+                                            }
+                                        )
 
-                                    $location.url("/user/" + newUser._id);
 
 
                                 });
