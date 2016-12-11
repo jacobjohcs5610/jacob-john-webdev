@@ -1,10 +1,10 @@
-module.exports = function(app, model, passport){
+module.exports = function(app, model, passport, LocalStrategy){
 
 
     var bcrypt = require("bcrypt-nodejs");
 
    // var passport = require('passport');
-    var LocalStrategy = require('passport-local').Strategy;
+    //var LocalStrategy = require('passport-local').Strategy;
 
     var FacebookStrategy = require('passport-facebook').Strategy;
 

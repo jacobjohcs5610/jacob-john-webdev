@@ -34,10 +34,10 @@ var passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
-//var LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 
-require("./assignment/app.js")(app,mongoose,passport);
-require("./public/project/server/app.js")(app,mongoose,passport);
+require("./assignment/app.js")(app,mongoose,passport,LocalStrategy);
+require("./public/project/server/app.js")(app,mongoose,passport,LocalStrategy);
 
 
 
