@@ -250,6 +250,8 @@ module.exports = function(app, model){
             function findUserById(req, res){
 
                 var userId = req.params.userId;
+                console.log(userId);
+                console.log(req.params);
                 model.userModel.findUserById(userId)
                     .then(
                         function(users){
