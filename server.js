@@ -25,9 +25,12 @@ app.listen(port, ipaddress);
 
 var connectionString = 'mongodb://127.0.0.1:27017/test';
 
+var mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
+mongoose.connect(connectionString);
 
-require("./assignment/app.js")(app,connectionString);
-require("./public/project/server/app.js")(app,connectionString);
+require("./assignment/app.js")(app,mongoose);
+require("./public/project/server/app.js")(app,mongoose);
 
 
 

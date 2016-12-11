@@ -1,10 +1,10 @@
-module.exports = function(app,connectionString) {
+module.exports = function(app,mongoose) {
     /*var UserModel = require("./model/user/user.model.server.js")(mongoose);*/
 
     //var connectionString = 'mongodb://127.0.0.1:27017/project';
 
-    var mongoose = require("mongoose");
-    mongoose.Promise = global.Promise;
+    //var mongoose = require("mongoose");
+    //mongoose.Promise = global.Promise;
     //mongoose.connect(connectionString);
 
     var model = require("./model/models.server.js")(mongoose);
