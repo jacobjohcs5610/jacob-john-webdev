@@ -54,7 +54,9 @@ module.exports = function(app, model){
     app.post("/api/project/login", passport.authenticate('local'), login);
 
     function login(req, res) {
-
+        console.log("project");
+        console.log(req);
+        console.log(req.user);
         var user = req.user;
         res.json(user);
     }
