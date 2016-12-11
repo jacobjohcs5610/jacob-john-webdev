@@ -1,15 +1,15 @@
-module.exports = function(app, model){
+module.exports = function(app, model, passport, LocalStrategy){
 
 
     var bcrypt = require("bcrypt-nodejs");
 
-    var passport = require('passport');
-    var LocalStrategy = require('passport-local').Strategy;
+   // var passport = require('passport');
+    //var LocalStrategy = require('passport-local').Strategy;
 
     var FacebookStrategy = require('passport-facebook').Strategy;
 
-    app.use(passport.initialize());
-    app.use(passport.session());
+    //app.use(passport.initialize());
+    //app.use(passport.session());
 
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID,
@@ -75,7 +75,7 @@ module.exports = function(app, model){
     }
 
 
-    passport.use(new LocalStrategy(localStrategy));
+    passport.use('assignment',new LocalStrategy(localStrategy));
     function localStrategy(username, password, done) {
 
         model.userModel
@@ -163,7 +163,7 @@ module.exports = function(app, model){
         res.send(200);
     }
 
-    app.post("/api/login", passport.authenticate('local'), login);
+    app.post("/api/login", passport.authenticate('assignment'), login);
 
     function login(req, res) {
         console.log(req.user);

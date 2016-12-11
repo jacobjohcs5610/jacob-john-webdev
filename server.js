@@ -29,8 +29,15 @@ var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 mongoose.connect(connectionString);
 
-require("./assignment/app.js")(app,mongoose);
-require("./public/project/server/app.js")(app,mongoose);
+var passport = require('passport');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+var LocalStrategy = require('passport-local').Strategy;
+
+require("./assignment/app.js")(app,mongoose,passport,LocalStrategy);
+require("./public/project/server/app.js")(app,mongoose,passport,LocalStrategy);
 
 
 
