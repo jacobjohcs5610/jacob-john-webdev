@@ -84,8 +84,12 @@
 
              function init() {
 
-                var promise = UserService.findUserById(vm.userId);
-                promise.success(function(user){vm.user= user;});
+                var promise = UserService.findUserById(vm.userId)
+                    .success(
+                        function(user){
+                            vm.user= user;
+                        }
+                    );
             }
             init();
 

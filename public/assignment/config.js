@@ -78,16 +78,17 @@
 
         function checkLoggedin($q, $http, $location, $rootScope) {
             var deferred = $q.defer();
-            $http.get('/api/loggedin').success(function(user) {
+            $http.get('/api/loggedin').success(
+                function(user) {
                // $rootScope.errorMessage = null;
-                if (user !== '0') {
+                    if (user !== '0') {
                  //   $rootScope.currentUser = user;
-                    deferred.resolve();
-                } else {
-                    deferred.reject();
-                    $location.url('/');
-                }
-            });
+                        deferred.resolve();
+                    } else {
+                        deferred.reject();
+                        $location.url('/');
+                    }
+                });
             return deferred.promise;
         };
 

@@ -98,7 +98,7 @@ module.exports = function(app, model){
             );
     }
 
-    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook'),function(req,res) {
             //successRedirect: '/#/user/:uid',
@@ -121,16 +121,18 @@ module.exports = function(app, model){
 
         });
 
-    app.get ('/api/loggedin', loggedin);
+    app.get('/api/loggedin', loggedin);
 
 
     function loggedin(req, res) {
+        console.log(req);
+        console.log(req.isAuthenticated());
         res.send(req.isAuthenticated() ? req.user : '0');
     }
 
 
 
-    app.post ("/api/register", register);
+    app.post("/api/register", register);
 
 
     function register (req, res) {
