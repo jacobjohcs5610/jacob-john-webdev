@@ -6,7 +6,7 @@
         .controller("RegisterController", RegisterController)
         .controller("ProfileController", ProfileController)
 
-        function LoginController($location, ProjectUserService) {
+        function LoginController($location, ProjectUserService, $http) {
             var vm = this;
             vm.login = login;
 
@@ -20,7 +20,7 @@
                     ProjectUserService.login(userIn).then(
                         function (response) {
                             var user = response.data;
-                            ProjectUserService.checkadmin().
+                            $http.get('/api/project/loggedin').
                                 success(
                                     function(users){
                                         if(users[0]){
@@ -36,7 +36,7 @@
             }
         }
 
-        function RegisterController($location, ProjectUserService) {
+        function RegisterController($location, ProjectUserService, $http) {
             var vm = this;
             vm.register = register;
 
@@ -62,7 +62,7 @@
                                     admin: false
                                 };
                                 ProjectUserService.register(user).success(function (newUser) {
-                                    ProjectUserService.checkadmin()
+                                    $http.get('/api/project/loggedin')
                                         .success(
                                             function(users){
                                                 $location.url("/user/" + newUser._id);

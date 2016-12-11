@@ -125,8 +125,7 @@ module.exports = function(app, model, passport, LocalStrategy){
 
 
     function loggedin(req, res) {
-        console.log(req);
-        console.log(req.isAuthenticated());
+
         res.send(req.isAuthenticated() ? req.user : '0');
     }
 
@@ -166,8 +165,7 @@ module.exports = function(app, model, passport, LocalStrategy){
     app.post("/api/login", passport.authenticate('assignment'), login);
 
     function login(req, res) {
-        console.log(req.user);
-        console.log(req);
+
         var user = req.user;
         res.json(user);
     }
@@ -251,8 +249,6 @@ module.exports = function(app, model, passport, LocalStrategy){
             function findUserById(req, res){
 
                 var userId = req.params.userId;
-                console.log(userId);
-                console.log(req.params);
                 model.userModel.findUserById(userId)
                     .then(
                         function(users){

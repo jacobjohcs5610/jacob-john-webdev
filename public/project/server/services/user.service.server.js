@@ -54,9 +54,7 @@ module.exports = function(app, model, passport, LocalStrategy){
     app.post("/api/project/login", passport.authenticate('project'), login);
 
     function login(req, res) {
-        console.log("project");
-        console.log(req);
-        console.log(req.user);
+
         var user = req.user;
         res.json(user);
     }
@@ -104,7 +102,7 @@ module.exports = function(app, model, passport, LocalStrategy){
 
             function createUser (req, res) {
                 var user = req.body;
-                console.log("in service server");
+
                 model.projectuserModel.createUser(req.body)
                     .then(
                         function(newUser){
