@@ -1,0 +1,10 @@
+1. GitHub URL: https://github.com/jacobjohcs5610/jacob-john-webdev
+
+2. web application host url: http://ec2-54-68-48-16.us-west-2.compute.amazonaws.com:3000
+
+3. I used the GIPHY api. Users are either administrators or regular users. Administrators can access any page and make any modification. Regular users can only edit their own submissions. All users can add a topic, add a gif, and comment on a gif.
+
+4.
+
+
+5. phone: 253 946 2044, 253 217 7274 
