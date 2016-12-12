@@ -92,7 +92,7 @@ module.exports = function(app, model, passport, LocalStrategy, modelProject){
 
     passport.use('assignment',new LocalStrategy(assignmentStrategy));
     function assignmentStrategy(username, password, done) {
-
+        console.log(modelProject);
         model.userModel
             .findUserByCredentials(username, password)
             .then(
@@ -102,6 +102,26 @@ module.exports = function(app, model, passport, LocalStrategy, modelProject){
                     if (user.username === username && bcrypt.compareSync(password, user.password)) {
 
                         return done(null, user);
+                    } else{
+                        modelProject.projectuserModel
+                            .findUserByCredentials(username, password)
+                            .then(
+                                function(users) {
+                                    var user = users[0];
+
+                                    if(user.username === username && bcrypt.compareSync(password, user.password)) {
+
+                                        return done(null, user);
+                                    } else {
+
+                                        return done(null, false);
+                                    }
+                                },
+                                function(err) {
+                                    if (err) { return done(err); }
+                                }
+                            );
+
                     }
                 }
                 ,
@@ -109,24 +129,7 @@ module.exports = function(app, model, passport, LocalStrategy, modelProject){
                     if (err) { return done(err); }
                 }
             );
-        modelProject.projectuserModel
-            .findUserByCredentials(username, password)
-            .then(
-                function(users) {
-                    var user = users[0];
 
-                    if(user.username === username && bcrypt.compareSync(password, user.password)) {
-
-                        return done(null, user);
-                    } else {
-
-                        return done(null, false);
-                    }
-                },
-                function(err) {
-                    if (err) { return done(err); }
-                }
-            );
     }
 
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));

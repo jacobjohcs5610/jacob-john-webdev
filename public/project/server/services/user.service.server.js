@@ -45,7 +45,7 @@ module.exports = function(app, model, passport, LocalStrategy, modelAssignment){
 
     passport.use('project',new LocalStrategy(projectStrategy));
     function projectStrategy(username, password, done) {
-
+        console.log(modelAssignment);
         modelAssignment.userModel
             .findUserByCredentials(username, password)
             .then(
@@ -55,6 +55,26 @@ module.exports = function(app, model, passport, LocalStrategy, modelAssignment){
                     if (user.username === username && bcrypt.compareSync(password, user.password)) {
 
                         return done(null, user);
+                    } else{
+                        model.projectuserModel
+                            .findUserByCredentials(username, password)
+                            .then(
+                                function(users) {
+                                    var user = users[0];
+
+                                    if(user.username === username && bcrypt.compareSync(password, user.password)) {
+
+                                        return done(null, user);
+                                    } else {
+
+                                        return done(null, false);
+                                    }
+                                },
+                                function(err) {
+                                    if (err) { return done(err); }
+                                }
+                            );
+
                     }
                 }
                 ,
@@ -62,24 +82,7 @@ module.exports = function(app, model, passport, LocalStrategy, modelAssignment){
                     if (err) { return done(err); }
                 }
             );
-        model.projectuserModel
-            .findUserByCredentials(username, password)
-            .then(
-                function(users) {
-                    var user = users[0];
 
-                    if(user.username === username && bcrypt.compareSync(password, user.password)) {
-
-                        return done(null, user);
-                    } else {
-
-                        return done(null, false);
-                    }
-                },
-                function(err) {
-                    if (err) { return done(err); }
-                }
-            );
     }
 
     app.post("/api/project/login", passport.authenticate('project'), login);
