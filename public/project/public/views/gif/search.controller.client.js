@@ -5,7 +5,7 @@
         .controller("SearchController", SearchController)
 
 
-    function SearchController($http,$sce,SearchService,$routeParams){
+    function SearchController($sce,SearchService,$routeParams,$location){
         var vm = this;
         vm.title = "Search";
         vm.searchGif = searchGif;
@@ -13,14 +13,24 @@
         vm.pageNumber = 0;
         vm.userId = $routeParams["uid"];
         vm.topicId = $routeParams["tid"];
+        vm.q = $routeParams.q;
+        vm.pg = $routeParams.pg;
 
-
+        function init(){
+            if(vm.q || vm.pg){
+                searchGif(vm.q,vm.pg);
+            }
+        }
+        init();
 
         function searchGif(query,page) {
+            page = parseInt(page);
             if(page<0 || page===undefined){
                 page=0;
             }
-            vm.pageNumber = page;
+            $location.url('?q='+query+'&pg='+page);
+            vm.pageNumber = parseInt(page);
+            vm.query = query;
             SearchService
                 .searchGif(query,vm.pageNumber*25)
                 .success(

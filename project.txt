@@ -4,6 +4,11 @@
 
 3. I used the GIPHY api. Users are either administrators or regular users. Administrators can access any page and make any modification. Regular users can only edit their own submissions. All users can add a topic, add a gif, and comment on a gif.
 
+Project users:
+username: "alice", password: "alice", admininstrator: true
+username: "bob", password: "bob", administrator: false
+username: "carl", password: "carl", administrator: false
+
 4.
 
 

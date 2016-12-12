@@ -57,7 +57,7 @@
                                 ProjectUserService.register(user).success(function (newUser) {
 
                                                 $location.url("/user/" + newUser._id);
-                                   
+
 
 
 
