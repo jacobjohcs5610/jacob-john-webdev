@@ -12,10 +12,15 @@
             "deleteComment" : deleteComment,
             "deleteAllCommentsForGif" : deleteAllCommentsForGif,
             "sortComments" : sortComments,
-            "findCommentsWithUsernameByGifId" : findCommentsWithUsernameByGifId
+            "findCommentsWithUsernameByGifId" : findCommentsWithUsernameByGifId,
+            "deleteEmptyComment" : deleteEmptyComment
 
         };
         return api;
+
+        function deleteEmptyComment(){
+            $http.delete("/api/project/empty");
+        }
 
         function findCommentsWithUsernameByGifId(gifId){
             return $http.get("/api/project/map/"+gifId);

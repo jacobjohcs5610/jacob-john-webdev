@@ -15,10 +15,8 @@
         vm.dateNow =  new Date();
 
         vm.checkSafeHtml = checkSafeHtml;
-        vm.checkSafeYouTubeUrl = checkSafeYouTubeUrl;
         vm.checkSafeImageUrl = checkSafeImageUrl;
         vm.sortItem = sortItem;
-        vm.addComment = addComment;
         vm.deleteComment = deleteComment;
         vm.deleteGif = deleteGif;
 
@@ -72,31 +70,9 @@
                 );
         }
 
-        function addComment(){
-            if(vm.gifGif) {
-                var comment = {
-                    _gif: vm.gifId,
-                    _user: vm.userId
-                };
-                CommentService.createComment(vm.gifId, comment)
-                    .success(
-                        function (commentAns) {
-                            vm.commentId = commentAns._id;
-                            $location.url('/user/' + vm.userId + '/topic/' + vm.topicId + '/gif/' + vm.gifId + '/comment/' + vm.commentId);
-                        }
-                    );
-            }
-        }
 
         function sortItem(start, end) {
-
-
             var comment = vm.comments[start];
-           // console.log(comment);
-
-            //vm.comments.splice(end, 0,moved );
-
-
 
             CommentService.sortComments(comment,vm.gifId,start,end)
                 .success(function(comment){
@@ -114,13 +90,7 @@
             return $sce.trustAsHtml(html);
         }
 
-        function checkSafeYouTubeUrl(url) {
-            var parts = url.split('/');
-            var id = parts[parts.length - 1];
-            url = "https://www.youtube.com/embed/"+id;
-            //console.log(url);
-            return $sce.trustAsResourceUrl(url);
-        }
+
 
         function checkSafeImageUrl(url){
             return $sce.trustAsResourceUrl(url);
@@ -130,18 +100,21 @@
         var vm = this;
         vm.addComment = addComment;
 
+        vm.title="New Comment";
         vm.gifId = $routeParams["pid"];
         vm.topicId = $routeParams["tid"];
         vm.userId = $routeParams["uid"];
 
 
-        function addComment(comment){
-            if(!comment.name){
+        function addComment(){
+            if(!vm.comment || !vm.comment.name){
                 vm.alert = "name field is required";
+            } else if(!vm.comment.text) {
+                vm.alert = "text field is required";
             } else {
-                comment._user = vm.userId;
-                comment._gif = vm.gifId;
-                CommentService.createComment(vm.gifId, comment)
+                vm.comment._user = vm.userId;
+                vm.comment._gif = vm.gifId;
+                CommentService.createComment(vm.gifId, vm.comment)
                     .success(function (newComment) {
                         vm.commentId = newComment._id;
                         $location.url('/user/'+vm.userId+'/topic/'+vm.topicId+'/gif/'+vm.gifId+'/comment');
@@ -157,7 +130,7 @@
         var vm = this;
         vm.deleteComment = deleteComment;
         vm.updateComment = updateComment;
-        vm.deleteTemp = deleteTemp;
+
 
         vm.commentId = $routeParams["wgid"];
         vm.gifId = $routeParams["pid"];
@@ -193,11 +166,6 @@
             }
         }
 
-        function deleteTemp(){
-
-
-            CommentService.deleteTemp();
-        }
 
     }
 

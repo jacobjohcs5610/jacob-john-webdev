@@ -14,10 +14,15 @@ module.exports = function(mongoose){
         sortComments: sortComments,
         deleteAllCommentsForGif: deleteAllCommentsForGif,
         findCommentsWithUsernameByGifId: findCommentsWithUsernameByGifId,
-        deleteAllCommentsForGifs: deleteAllCommentsForGifs
+        deleteAllCommentsForGifs: deleteAllCommentsForGifs,
+        deleteEmptyComment: deleteEmptyComment
     }
 
     return api;
+
+    function deleteEmptyComment(){
+        return CommentModel.remove({$or: [{name: {$exists: false}},{text: {$exists: false}}]});
+    }
 
     function findCommentsWithUsernameByGifId(gifId){
         return CommentModel.find({_gif: gifId}).populate('_user','username').sort({dateCreated: -1});

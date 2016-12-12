@@ -1,6 +1,19 @@
 module.exports = function (app,model){
 
 
+    app.delete("/api/project/empty", deleteEmptyComment);
+    function deleteEmptyComment(req,res){
+        model.commentModel.deleteEmptyComment()
+            .then(
+                function(status){
+                    res.sendStatus(200);
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            )
+    }
+
 
     app.get("/api/project/map/:gifId", findCommentsWithUsernameByGifId);
 

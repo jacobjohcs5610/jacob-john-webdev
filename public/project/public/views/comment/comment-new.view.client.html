@@ -1,0 +1,57 @@
+
+
+<div ng-include="'/views/header2.view.client.html'"></div>
+
+
+<div class="container">
+
+    <div ng-show="model.alert" class="row alert alert-danger alert-dismissible">
+        {{model.alert}}
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+
+
+            <label for="username">Name</label>
+            <input id="username" ng-class="{'alert-danger': model.alert && !model.comment.name}" type="text" ng-model="model.comment.name" class="form-control" required>
+            <div class="col-xs-12 field-error" ng-show="model.alert && !model.comment.name">
+                name is required
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12">
+
+            <div ng-model="model.comment.text" ng-class="{'alert-danger': model.alert && !model.comment.text}"
+                 text-angular
+                 ta-toolbar="[['bold','italics','underline','strikeThrough'],
+                    ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                    ]">
+            </div>
+            <div class="col-xs-12 field-error" ng-show="model.alert && !model.comment.text">
+                text is required
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+
+
+            <a href ng-click="model.addComment()"><button type="submit" class="btn btn-success form-control">Add Comment</button></a>
+
+
+        </div>
+    </div>
+
+
+</div>
+
+
