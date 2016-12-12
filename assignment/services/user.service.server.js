@@ -62,8 +62,7 @@ module.exports = function(app, model, passport, LocalStrategy){
     passport.deserializeUser(deserializeUser);
 
     function deserializeUser(user, done) {
-        console.log(user);
-        console.log(done);
+
         if(user.admin===undefined) {
             model.userModel
                 .findUserById(user._id)
@@ -92,7 +91,7 @@ module.exports = function(app, model, passport, LocalStrategy){
 
     passport.use('assignment',new LocalStrategy(assignmentStrategy));
     function assignmentStrategy(username, password, done) {
-        console.log(model);
+
         model.userModel
             .findUserByCredentials(username, password)
             .then(

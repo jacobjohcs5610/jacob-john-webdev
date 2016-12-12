@@ -16,8 +16,7 @@ module.exports = function(app, model, passport, LocalStrategy){
     passport.deserializeUser(deserializeUser);
 
     function deserializeUser(user, done) {
-        console.log(user);
-        console.log(done);
+
         if(user.admin===undefined){
             model.userModel
                 .findUserById(user._id)
@@ -45,7 +44,7 @@ module.exports = function(app, model, passport, LocalStrategy){
 
     passport.use('project',new LocalStrategy(projectStrategy));
     function projectStrategy(username, password, done) {
-        console.log(model);
+
         model.projectuserModel
             .findUserByCredentials(username, password)
             .then(
