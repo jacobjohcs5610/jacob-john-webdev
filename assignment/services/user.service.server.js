@@ -1,4 +1,4 @@
-module.exports = function(app, model, passport, LocalStrategy){
+module.exports = function(app, model, passport, LocalStrategy, modelProject){
 
 
     var bcrypt = require("bcrypt-nodejs");
@@ -62,16 +62,31 @@ module.exports = function(app, model, passport, LocalStrategy){
     passport.deserializeUser(deserializeUser);
 
     function deserializeUser(user, done) {
-        model.userModel
-            .findUserById(user._id)
-            .then(
-                function(user){
-                    done(null, user);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
+        console.log(user);
+        console.log(done);
+        if(user.admin===undefined) {
+            model.userModel
+                .findUserById(user._id)
+                .then(
+                    function (user) {
+                        done(null, user);
+                    },
+                    function (err) {
+                        done(err, null);
+                    }
+                );
+        } else{
+            modelProject.projectuserModel
+                .findUserById(user._id)
+                .then(
+                    function (user) {
+                        done(null, user);
+                    },
+                    function (err) {
+                        done(err, null);
+                    }
+                );
+        }
     }
 
 
@@ -79,6 +94,22 @@ module.exports = function(app, model, passport, LocalStrategy){
     function assignmentStrategy(username, password, done) {
 
         model.userModel
+            .findUserByCredentials(username, password)
+            .then(
+                function(users) {
+                    var user = users[0];
+
+                    if (user.username === username && bcrypt.compareSync(password, user.password)) {
+
+                        return done(null, user);
+                    }
+                }
+                ,
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            );
+        modelProject.projectuserModel
             .findUserByCredentials(username, password)
             .then(
                 function(users) {
