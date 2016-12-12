@@ -7,7 +7,7 @@ module.exports = function(app,mongoose,passport,LocalStrategy) {
     //mongoose.Promise = global.Promise;
     //mongoose.connect(connectionString);
 
-    var model = require("../../../../model/models.server.js")(mongoose);
+    var model = require("models.server.js")(mongoose);
     require("./services/user.service.server.js")(app,model,passport,LocalStrategy);
 
     require("./services/topic.service.server.js")(app,model);
