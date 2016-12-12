@@ -36,8 +36,8 @@ app.use(passport.session());
 
 var LocalStrategy = require('passport-local').Strategy;
 
-var modelAssignment = require("./assignment/model/models.server.js");
-var modelProject = require("./public/project/server/model/models.server.js");
+var modelAssignment = require("./assignment/model/models.server.js")(mongoose);
+var modelProject = require("./public/project/server/model/models.server.js")(mongoose);
 
 require("./assignment/app.js")(app,mongoose,passport,LocalStrategy,modelProject);
 require("./public/project/server/app.js")(app,mongoose,passport,LocalStrategy,modelAssignment);

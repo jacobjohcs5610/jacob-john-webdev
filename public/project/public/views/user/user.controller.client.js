@@ -20,16 +20,16 @@
                     ProjectUserService.login(userIn).then(
                         function (response) {
                             var user = response.data;
-                            $http.get('/api/project/loggedin').
-                                success(
-                                    function(users){
-                                        if(users[0]){
+                           // $http.get('/api/project/loggedin').
+                            //    success(
+                            //        function(users){
+                            //            if(users[0]){
                                             $location.url("/user/" + user._id);
-                                        } else{
-                                            $location.url("/login");
-                                        }
-                                    }
-                            )
+                             //           } else{
+                             //               $location.url("/login");
+                             //           }
+                            //        }
+                         //   )
 
                         });
                 }
@@ -62,12 +62,12 @@
                                     admin: false
                                 };
                                 ProjectUserService.register(user).success(function (newUser) {
-                                    $http.get('/api/project/loggedin')
-                                        .success(
-                                            function(users){
+                                   // $http.get('/api/project/loggedin')
+                                   //     .success(
+                                   //         function(users){
                                                 $location.url("/user/" + newUser._id);
-                                            }
-                                        )
+                                   //         }
+                                    //    )
 
 
 
