@@ -39,8 +39,8 @@ var LocalStrategy = require('passport-local').Strategy;
 
 
 
-require("./assignment/app.js")(app,mongoose,passport,LocalStrategy);
-require("./public/project/server/app.js")(app,mongoose,passport,LocalStrategy);
+require("./app.js")(app,mongoose,passport,LocalStrategy);
+//require("./public/project/server/app.js")(app,mongoose,passport,LocalStrategy);
 
 
 
