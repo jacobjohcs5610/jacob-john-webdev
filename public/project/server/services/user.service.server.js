@@ -46,7 +46,7 @@ module.exports = function(app, model, passport, LocalStrategy, modelAssignment){
     passport.use('project',new LocalStrategy(projectStrategy));
     function projectStrategy(username, password, done) {
         console.log(modelAssignment);
-        modelAssignment.userModel
+        model.projectuserModel
             .findUserByCredentials(username, password)
             .then(
                 function(users) {
@@ -56,7 +56,7 @@ module.exports = function(app, model, passport, LocalStrategy, modelAssignment){
 
                         return done(null, user);
                     } else{
-                        model.projectuserModel
+                        modelAssignment.userModel
                             .findUserByCredentials(username, password)
                             .then(
                                 function(users) {
