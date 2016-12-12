@@ -5,7 +5,7 @@ module.exports = function(app,mongoose,passport,LocalStrategy) {
 
 
 
-    var model = require("/models.server.js")(mongoose);
+    var model = require("./models.server.js")(mongoose);
 
     require("./assignment/services/user.service.server.js")(app,model,passport,LocalStrategy);
     require("./assignment/services/website.service.server.js")(app,model);
