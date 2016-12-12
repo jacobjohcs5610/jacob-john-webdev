@@ -1,4 +1,4 @@
-module.exports = function(app, model, passport, LocalStrategy, modelProject){
+module.exports = function(app, model, passport, LocalStrategy){
 
 
     var bcrypt = require("bcrypt-nodejs");
@@ -76,7 +76,7 @@ module.exports = function(app, model, passport, LocalStrategy, modelProject){
                     }
                 );
         } else{
-            modelProject.projectuserModel
+            model.projectuserModel
                 .findUserById(user._id)
                 .then(
                     function (user) {
@@ -92,7 +92,7 @@ module.exports = function(app, model, passport, LocalStrategy, modelProject){
 
     passport.use('assignment',new LocalStrategy(assignmentStrategy));
     function assignmentStrategy(username, password, done) {
-        console.log(modelProject);
+        console.log(model);
         model.userModel
             .findUserByCredentials(username, password)
             .then(
@@ -103,7 +103,7 @@ module.exports = function(app, model, passport, LocalStrategy, modelProject){
 
                         return done(null, user);
                     } else{
-                        modelProject.projectuserModel
+                        model.projectuserModel
                             .findUserByCredentials(username, password)
                             .then(
                                 function(users) {
